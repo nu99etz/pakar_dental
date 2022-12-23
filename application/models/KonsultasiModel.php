@@ -30,7 +30,7 @@ class KonsultasiModel extends CI_Model
             ->get();
         $gejala = $sql->result_array();
         $data = [];
-        foreach($gejala as $key => $value) {
+        foreach ($gejala as $key => $value) {
             $data[$value['nama_ms_kategori']][] = $value;
         }
         return $data;
@@ -39,7 +39,7 @@ class KonsultasiModel extends CI_Model
     public function getAllKonsultasi($where = null)
     {
         $konsultasi = $this->db->select('*')->from('konsultasi');
-        if($where != null) {
+        if ($where != null) {
             $konsultasi->where($where);
         }
         return $konsultasi->get()->result_array();
@@ -74,16 +74,17 @@ class KonsultasiModel extends CI_Model
             ];
             $this->db->insert('konsultasi', $data_konsultasi);
             $id_konsultasi = $this->db->insert_id();
-            
-            foreach($param['konsultasi']['fc']['jawabanYa'] as $key => $value) {
+
+            foreach ($param['konsultasi']['fc']['jawabanYa'] as $key => $value) {
                 $detail_konsultasi_gejala = [
                     'id_konsultasi' => $id_konsultasi,
-                    'id_gejala' => $value[0]['id_ms_gejala']
+                    'id_gejala' => $value[0]['id_ms_gejala'],
+                    'nilai_kepercayaan ' => $param['konsultasi']['fc']['nilaiKepercayaan'][$key]
                 ];
                 $this->db->insert('detail_konsultasi_gejala', $detail_konsultasi_gejala);
             }
 
-            foreach($param['konsultasi']['fc']['penyakit'] as $key => $value) {
+            foreach ($param['konsultasi']['fc']['penyakit'] as $key => $value) {
                 $detail_konsultasi_penyakit = [
                     'id_konsultasi' => $id_konsultasi,
                     'id_penyakit' => $value[0]['id_ms_penyakit'],
@@ -94,7 +95,7 @@ class KonsultasiModel extends CI_Model
 
             // insert cf
             $i = 0;
-            foreach($param['konsultasi']['cf']['penyakit'] as $key => $value) {
+            foreach ($param['konsultasi']['cf']['penyakit'] as $key => $value) {
                 $detail_konsultasi_penyakit = [
                     'id_konsultasi' => $id_konsultasi,
                     'id_penyakit' => $value[0]['id_ms_penyakit'],
@@ -111,5 +112,25 @@ class KonsultasiModel extends CI_Model
             $this->db->trans_rollback();
             return false;
         }
+    }
+
+    public function historyKonsultasi($param = null)
+    {
+        $history = $this->db->select('*')->from('konsultasi');
+        if ($param != null) {
+            $history->where($param);
+        }
+
+        $history = $history->get()->result_array();
+        return $history;
+    }
+
+    public function deleteKonsultasi($id)
+    {
+        $this->db->where(['id_konsultasi' => $id])->delete('konsultasi');
+        return [
+            'status' => true,
+            'messages' => 'Data Sukses Dihapus'
+        ];
     }
 }

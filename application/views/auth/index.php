@@ -24,7 +24,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </div>
                 <div class="row">
                     <!-- /.col -->
-                    <div class="col-xs-4"></div>
                     <div class="col-xs-4">
                         <button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
                     </div>

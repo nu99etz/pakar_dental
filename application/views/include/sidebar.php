@@ -58,12 +58,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <li><a href="<?php echo base_url(); ?>cf"><i class="fa fa-tree"></i> Nilai Certainly Factor</a></li>
                     </ul>
                 </li>
-
-                <!-- <li>
-                    <a href="<?php echo base_url(); ?>aturan">
-                        <i class="fa fa-tree"></i> <span>Aturan</span>
-                    </a>
-                </li> -->
             <?php    } ?>
 
 
@@ -73,14 +67,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </a>
             </li>
 
-            <?php if ($this->session->userdata('role') == 1) {
-            ?>
-                <!-- <li>
-                    <a href="<?php echo base_url(); ?>rep_konsultasi">
-                        <i class="fa fa-file-excel-o"></i> <span>Laporan Konsultasi</span>
-                    </a>
-                </li> -->
-            <?php    } ?>
+            <li>
+                <a href="<?php echo base_url(); ?>history">
+                    <i class="fa fa-history"></i> <span>History</span>
+                </a>
+            </li>
 
         </ul>
     </section>

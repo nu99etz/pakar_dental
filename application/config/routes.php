@@ -121,3 +121,9 @@ $route['cf'] = 'CertainlyFactorController/index';
 $route['cf/get_cf/(:any)'] = 'CertainlyFactorController/getCF/$1';
 $route['cf/store'] = 'CertainlyFactorController/store';
 $route['cf/generate_cf'] = 'CertainlyFactorController/generateCF';
+
+// history
+$route['history'] = 'HistoryController/index';
+$route['history/detail/(:any)'] = 'HistoryController/detailHistory/$1';
+$route['history/ajax'] = 'HistoryController/ajax';
+$route['history/destroy/(:any)'] = 'HistoryController/deleteHistory/$1';

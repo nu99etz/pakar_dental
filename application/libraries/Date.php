@@ -26,7 +26,7 @@ class Date {
     	return $month;
 	}
 	
-	public function getMonthNameIDNarray() {
+	public function getMonthNameIDNarray($no = null) {
     	$month[1] = 'Januari';
     	$month[2] = 'Februari';
     	$month[3] = 'Maret';
@@ -39,7 +39,11 @@ class Date {
     	$month[10] = 'Oktober';
     	$month[11] = 'November';
     	$month[12] = 'Desember';
-    	return $month;
+		if($no == null) {
+			return $month;
+		} else {
+			return $month[$no];
+		}
 	}
 
 	public function getDateNameIDNarray($no = null) {
@@ -65,11 +69,13 @@ class Date {
 	        return $number. $ends[$number % 10];
     }
 
-    public function getDate($lang,$data) {
+    public function getDate($data, $lang = "IND") {
     	$ex = explode('-',$data);
-    	if($lang == 'ENG') {
-    		$month = $this->getMonthNameENGarray();
-    		return $month[(int) $ex[1]].' '.$this->ordinal((int) $ex[2]).', '.$ex[0];
-    	}
+		if($lang == 'ENG') {
+
+		} else if($lang == "IND") {
+			return $ex[2] . " " . $this->getMonthNameIDNarray($ex[1]) . " " . $ex[0];
+		}
     }
+	
 }

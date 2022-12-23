@@ -88,19 +88,13 @@ class KonsultasiController extends MainController
     {
         $nodeJawabanYa = [];
         $penyakitNode = [];
+        $nilaiKepercayaan = [];
 
         foreach ($answer as $key => $value) {
             // cek semua jawaban node jika jawaban ya maka gabung node menjadi satu
             if (isset($value)) {
-                // if ($value == "0") {
-                //     // Maintence::debug($key);
-                //     $nodeJawabanYa[] = $key;
-                //     $penyakit = $this->forwardChainning($key);
-                //     if (!empty($penyakit)) {
-                //         $penyakitNode[] = $penyakit;
-                //     }
-                // }
                 $nodeJawabanYa[] = $key;
+                $nilaiKepercayaan[] = $value;
                 $penyakit = $this->forwardChainning($key);
                 if (!empty($penyakit)) {
                     $penyakitNode[] = $penyakit;
@@ -158,6 +152,7 @@ class KonsultasiController extends MainController
 
         $data = [
             'jawabanYa' => $jawabanYa,
+            'nilaiKepercayaan' => $nilaiKepercayaan,
             'penyakit' => $penyakit,
             'kemungkinan' => $kemungkinan
         ];
@@ -171,9 +166,11 @@ class KonsultasiController extends MainController
             $cf = 0;
             $cfk = 0;
             $total = 0;
+            $temp_cf = [];
             foreach ($answer as $key_answer => $value_answer) {
                 if ($value['id_gejala'] == $key_answer) {
                     $cf = ($value['mb_value'] - $value['md_value']) * $value_answer;
+                    $temp_cf[] = $cf;
                     if ($cfk == 0) {
                         $cfk = $cf + (0 * (1 - $cf));
                     } else {
@@ -249,9 +246,9 @@ class KonsultasiController extends MainController
         $this->fc->removeTempKonsultasi($id_user);
         // remove session
         $this->session->unset_userdata(['fc', 'cf']);
+        $this->session->unset_userdata('is_save');
 
         $gejala = $this->konsultasi->getAllGejalaGrouping();
-        // $this->maintence->Debug($gejala);
         $layout = 'konsultasi/index';
         $data = [
             // 'parent_gejala' => 0,
@@ -279,6 +276,7 @@ class KonsultasiController extends MainController
             // remove session
             $this->session->unset_userdata('fc');
             $this->session->unset_userdata('cf');
+            $this->session->unset_userdata('is_save');
 
             // save ke session sementara
             $this->session->set_userdata([
@@ -323,68 +321,19 @@ class KonsultasiController extends MainController
                 // remove session
                 $this->session->unset_userdata('fc');
                 $this->session->unset_userdata('cf');
+                $this->session->set_userdata(['is_save' => 1]);
                 $response = [
                     'status' => 200,
                     'messages' => "Konsultasi berhasil disimpan",
-                    'url' => base_url()
+                    'url' => base_url() . 'konsultasi'
                 ];
             } else {
                 $response = [
-                    'status' => 200,
+                    'status' => 422,
                     'messages' => "Konsultasi gagal disimpan"
                 ];
             }
             echo json_encode($response);
         }
-    }
-
-    public function ajax()
-    {
-        $konsultasi = $this->konsultasi->getAllKonsultasi();
-        $no = 1;
-        $record = [];
-        foreach ($konsultasi as $value) {
-            $row = [];
-            $row[] = $no;
-            $row[] = $value['nama_pemilik_hewan'];
-            $row[] = $value['nama_hewan'];
-            $row[] = $value['usia_hewan'];
-            $row[] = $value['tanggal_konsultasi'];
-            $row[] = '<button type="button" name="lihat" action="' . base_url() . 'rep_konsultasi/' . $value['id'] . '" class="btn-lihat btn btn-flat btn-primary btn-sm"><i class = "fa fa-eye"></i> Lihat Hasil</button> ';
-            $no++;
-            $record[] = $row;
-        }
-        echo json_encode([
-            'data' => $record
-        ]);
-    }
-
-    public function indexReport()
-    {
-        if (!$this->session->userdata('logged') || $this->session->userdata('role') != 1) {
-            redirect('auth/');
-        }
-        $layout = 'konsultasi/list_report';
-        $this->getLayout($layout);
-    }
-
-    public function getReport($id)
-    {
-        $layout = 'konsultasi/konsultasi_view';
-        $konsultasi = $this->konsultasi->getAllKonsultasi($id);
-        $data = [
-            'konsultasi' => $konsultasi,
-        ];
-        $this->load->view($layout, $data);
-    }
-
-    public function penjelasanGejala($id)
-    {
-        $layout = 'gejala/form_penjelasan';
-        $gejala = $this->gejala->getGejala($id);
-        $data = [
-            'gejala' => $gejala,
-        ];
-        $this->load->view($layout, $data);
     }
 }
