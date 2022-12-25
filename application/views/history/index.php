@@ -33,6 +33,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <tr>
                                     <th>No</th>
                                     <th>Tanggal Konsultasi</th>
+                                    <?php if ($this->session->userdata('role') == 1) {
+                                    ?>
+                                        <th>Nama User</th>
+                                    <?php  } ?>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>

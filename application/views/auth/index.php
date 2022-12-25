@@ -25,9 +25,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="row">
                     <!-- /.col -->
                     <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
+                        <button type="button" class="btn btn-warning btn-block btn-flat btn-back"><i class="fa fa-chevron-left"></i> Kembali</button>
                     </div>
                     <div class="col-xs-4"></div>
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat"><i class="fa fa-sign-in"></i> Masuk</button>
+                    </div>
                     <!-- /.col -->
                 </div>
             </form>
@@ -40,6 +43,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     radioClass: 'iradio_square-blue',
                     increaseArea: '20%' /* optional */
                 });
+            });
+
+            $('.btn-back').on('click', function() {
+                window.location.href = "<?php echo base_url();?>frontend";
             });
 
             $('#form-login').on('submit', function() {

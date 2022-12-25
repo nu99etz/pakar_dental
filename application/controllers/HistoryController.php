@@ -17,7 +17,7 @@ class HistoryController extends MainController
 
     public function ajax()
     {
-        if($this->session->userdata('role') != 1) {
+        if($this->session->userdata('role') == 2) {
             $id_user = $this->session->userdata('id_user');
             $param = ['id_user' => $id_user];
         } else {
@@ -30,6 +30,10 @@ class HistoryController extends MainController
             $row = [];
             $row[] = $no;
             $row[] = $this->date->getDate($value['tanggal_konsultasi']);
+            if($this->session->userdata('role') == 1) {
+                $user = $this->getUser($value['id_user']);
+                $row[] = $user['nama_user'];
+            }
             $button = '<button type="button" name="lihat" action="' . base_url() . 'history/detail/' . $value['id_konsultasi'] . '" class="btn-lihat btn btn-flat btn-primary btn-sm"><i class = "fa fa-eye"></i></button> ';
             $button .= '<button type="button" name="delete" action="' . base_url() . 'history/destroy/' . $value['id_konsultasi'] . '" class="btn-delete btn btn-flat btn-danger btn-sm"><i class = "fa fa-trash"></i></button> ';
             $row[] = $button;
@@ -57,6 +61,12 @@ class HistoryController extends MainController
         return $penyakit;
     }
 
+    private function getUser($id)
+    {
+        $user = $this->db->select('*')->from('users')->where(['id' => $id])->get();
+        return $user->row_array();
+    }
+
     public function index()
     {
         $layout = 'history/index';
@@ -65,6 +75,25 @@ class HistoryController extends MainController
 
     public function detailHistory($id)
     {
+
+        $param = null;
+        if ($this->session->userdata('role') == 2) {
+            $id_user = $this->session->userdata('id_user');
+            $param = [
+                'id_konsultasi' => $id,
+                'id_user' => $id_user
+            ];
+        } else {
+            $param = [
+                'id_konsultasi' => $id,
+            ];
+        }
+
+        $konsultasi = $this->db->select('*')->from('konsultasi')->where($param)->get()->row_array();
+        if(empty($konsultasi)) {
+            redirect(base_url() . "history");
+        }
+
         $gejala = $this->db->select('*')->from('detail_konsultasi_gejala')->where(['id_konsultasi' => $id])->get()->result_array();
         $map_gejala = [];
         foreach($gejala as $key => $value) {
@@ -94,7 +123,10 @@ class HistoryController extends MainController
         $data = [
             'gejala' => $map_gejala,
             'penyakit_fc' => $map_penyakit_fc,
-            'penyakit_cf' => $map_penyakit_cf
+            'penyakit_cf' => $map_penyakit_cf,
+            'user_detail' => $this->getUser($konsultasi['id_user']),
+            'tanggal_konsultasi' => $this->date->getdate($konsultasi['tanggal_konsultasi'])
+
         ];
 
         $layout = 'history/detail_view';

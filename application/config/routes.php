@@ -127,3 +127,8 @@ $route['history'] = 'HistoryController/index';
 $route['history/detail/(:any)'] = 'HistoryController/detailHistory/$1';
 $route['history/ajax'] = 'HistoryController/ajax';
 $route['history/destroy/(:any)'] = 'HistoryController/deleteHistory/$1';
+
+//frontend
+$route['frontend'] = 'DashboardController/indexFrontEnd';
+$route['frontend/addKontak'] = 'DashboardController/addKontak';
+$route['frontend/panduan'] = 'DashboardController/indexFrontEndPanduan';

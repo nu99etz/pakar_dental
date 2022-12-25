@@ -13,7 +13,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <div class="login-box-body">
             <p class="login-box-msg">Silahkan Mendaftar</p>
 
-            <form id="form-login" action="<?php echo $action; ?>" method="post">
+            <form id="form-register" action="<?php echo $action; ?>" method="post">
                 <div class="form-group has-feedback">
                     <input type="text" id="username" name="username" class="form-control" placeholder="Username">
                 </div>
@@ -35,22 +35,28 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <option value="L">Laki - laki</option>
                         <option value="P">Perempuan</option>
                     </select>
-                    <!-- <span class="glyphicon glyphicon-user form-control-feedback"></span> -->
                 </div>
                 <div class="form-group has-feedback">
                     <input type="password" id="password" name="password" class="form-control" placeholder="Password">
                 </div>
                 <div class="row">
                     <!-- /.col -->
-                    <div class="col-xs-2"></div>
-                    <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Daftar</button>
+                    <div class="col-xs-12">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat"><i class="fa fa-user-plus"></i> Daftar</button>
                     </div>
-                    <div class="col-xs-4">
-                        <button type="reset" class="btn btn-warning btn-block btn-flat">Reset</button>
-                    </div>
-                    <div class="col-xs-2"></div>
                     <!-- /.col -->
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button type="reset" class="btn btn-warning btn-block btn-flat"><i class="fa fa-refresh"></i> Reset</button>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button type="button" class="btn btn-danger btn-block btn-flat btn-back"><i class="fa fa-chevron-left"></i> Kembali</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -64,11 +70,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 });
             });
 
-            $('#form-login').on('submit', function() {
+            $('.btn-back').on('click', function() {
+                window.location.href = "<?php echo base_url();?>frontend";
+            });
+
+            $('#form-register').on('submit', function() {
                 event.preventDefault();
                 let _data = new FormData($(this)[0]);
 
-                $(document).on('submit', 'form#form-login', function() {
+                $(document).on('submit', 'form#form-register', function() {
                     event.preventDefault();
                     let _url = $(this).attr('action');
                     let _data = new FormData($(this)[0]);
@@ -78,22 +88,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         } else if (data.status == 200) {
                             Swal.fire({
                                 type: 'success',
-                                title: "Login Sukses",
+                                title: "Pendaftaran Sukses",
                                 text: data.messages,
                                 timer: 3000,
                                 icon: 'success',
                                 showCancelButton: false,
                                 showConfirmButton: false
                             }).then(function() {
-                                window.location.href = data.url;
+                                window.location.href = "<?php echo base_url();?>auth";
                             });
                         }
                     }, _url, 'json', 'post', _data);
                 });
             });
         </script>
-
-
 </body>
 
 </html>

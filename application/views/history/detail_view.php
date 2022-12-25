@@ -17,6 +17,30 @@
         <div class="row">
             <div class="col-xs-12">
 
+                <?php if ($this->session->userdata('role') == 1) {
+                ?>
+                    <!-- Default box -->
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Detail User</h3>
+                        </div>
+                        <div class="box-body">
+                            <table id="gejala" class="table table-bordered table-hover">
+                                <tr>
+                                    <th>Nama User</th>
+                                    <td><?php echo $user_detail['nama_user']; ?></td>
+                                </tr>
+                                <tr>
+                                    <th>Tanggal Konsultasi</th>
+                                    <td><?php echo $tanggal_konsultasi; ?></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                <?php   } ?>
+
                 <!-- Default box -->
                 <div class="box">
                     <div class="box-header">
