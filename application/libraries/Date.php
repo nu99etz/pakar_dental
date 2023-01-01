@@ -74,7 +74,7 @@ class Date {
 		if($lang == 'ENG') {
 
 		} else if($lang == "IND") {
-			return $ex[2] . " " . $this->getMonthNameIDNarray($ex[1]) . " " . $ex[0];
+			return (int) $ex[2] . " " . $this->getMonthNameIDNarray((int) $ex[1]) . " " . (int) $ex[0];
 		}
     }
 	
