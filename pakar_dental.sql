@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 21, 2022 at 02:48 PM
--- Server version: 10.10.1-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Dec 28, 2022 at 12:56 PM
+-- Server version: 10.9.4-MariaDB
+-- PHP Version: 8.1.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `certainly_factor` (
   `id_penyakit` int(11) DEFAULT NULL,
   `mb_value` float DEFAULT NULL,
   `md_value` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `certainly_factor`
@@ -344,29 +344,47 @@ INSERT INTO `certainly_factor` (`id_certainly_factor`, `id_gejala`, `id_penyakit
 CREATE TABLE `detail_konsultasi_gejala` (
   `id_detail_konsultasi_gejala` int(11) NOT NULL,
   `id_konsultasi` int(11) DEFAULT NULL,
-  `id_gejala` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id_gejala` int(11) DEFAULT NULL,
+  `nilai_kepercayaan` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `detail_konsultasi_gejala`
 --
 
-INSERT INTO `detail_konsultasi_gejala` (`id_detail_konsultasi_gejala`, `id_konsultasi`, `id_gejala`) VALUES
-(1, 3, 1),
-(2, 3, 2),
-(3, 3, 3),
-(4, 3, 7),
-(5, 3, 9),
-(6, 3, 15),
-(7, 3, 18),
-(8, 3, 20),
-(9, 3, 22),
-(10, 3, 25),
-(11, 3, 29),
-(12, 3, 34),
-(13, 3, 36),
-(14, 3, 38),
-(15, 3, 39);
+INSERT INTO `detail_konsultasi_gejala` (`id_detail_konsultasi_gejala`, `id_konsultasi`, `id_gejala`, `nilai_kepercayaan`) VALUES
+(1, 3, 1, NULL),
+(2, 3, 2, NULL),
+(3, 3, 3, NULL),
+(4, 3, 7, NULL),
+(5, 3, 9, NULL),
+(6, 3, 15, NULL),
+(7, 3, 18, NULL),
+(8, 3, 20, NULL),
+(9, 3, 22, NULL),
+(10, 3, 25, NULL),
+(11, 3, 29, NULL),
+(12, 3, 34, NULL),
+(13, 3, 36, NULL),
+(14, 3, 38, NULL),
+(15, 3, 39, NULL),
+(16, 4, 1, 0.5),
+(17, 4, 3, 0.4),
+(18, 4, 6, 0.9),
+(19, 4, 8, 0.5),
+(20, 4, 10, 0.6),
+(21, 4, 13, 0.4),
+(22, 4, 15, 0.5),
+(23, 4, 17, 0.7),
+(24, 4, 19, 0.6),
+(25, 4, 21, 0.3),
+(26, 4, 24, 0.7),
+(27, 4, 27, 0.4),
+(28, 4, 30, 0.6),
+(29, 4, 33, 0.1),
+(30, 4, 36, 1),
+(31, 4, 38, 1),
+(32, 4, 40, 1);
 
 -- --------------------------------------------------------
 
@@ -380,7 +398,7 @@ CREATE TABLE `detail_konsultasi_penyakit` (
   `id_penyakit` int(11) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   `presentase_cf` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `detail_konsultasi_penyakit`
@@ -399,7 +417,31 @@ INSERT INTO `detail_konsultasi_penyakit` (`id_detail_konsultasi_penyakit`, `id_k
 (10, 3, 17, 1, NULL),
 (11, 3, 18, 1, NULL),
 (12, 3, 6, 2, 28),
-(13, 3, 5, 2, 10);
+(13, 3, 5, 2, 10),
+(14, 4, 2, 1, NULL),
+(15, 4, 1, 1, NULL),
+(16, 4, 3, 1, NULL),
+(17, 4, 4, 1, NULL),
+(18, 4, 6, 1, NULL),
+(19, 4, 7, 1, NULL),
+(20, 4, 8, 1, NULL),
+(21, 4, 9, 1, NULL),
+(22, 4, 14, 1, NULL),
+(23, 4, 17, 1, NULL),
+(24, 4, 18, 1, NULL),
+(25, 4, 14, 2, 80),
+(26, 4, 7, 2, 70),
+(27, 4, 15, 2, 50),
+(28, 4, 19, 2, 50),
+(29, 4, 22, 2, 50),
+(30, 4, 3, 2, 40),
+(31, 4, 6, 2, 40),
+(32, 4, 10, 2, 35),
+(33, 4, 1, 2, 30),
+(34, 4, 21, 2, 30),
+(35, 4, 9, 2, 30),
+(36, 4, 4, 2, 20),
+(37, 4, 12, 2, 10);
 
 -- --------------------------------------------------------
 
@@ -411,7 +453,7 @@ CREATE TABLE `konsultasi` (
   `id_konsultasi` int(11) NOT NULL,
   `id_user` int(11) DEFAULT NULL,
   `tanggal_konsultasi` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `konsultasi`
@@ -420,7 +462,30 @@ CREATE TABLE `konsultasi` (
 INSERT INTO `konsultasi` (`id_konsultasi`, `id_user`, `tanggal_konsultasi`) VALUES
 (1, 1, '2022-10-28'),
 (2, 1, '2022-10-28'),
-(3, 1, '2022-12-20');
+(3, 1, '2022-12-20'),
+(4, 13, '2022-12-25');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kontak`
+--
+
+CREATE TABLE `kontak` (
+  `id_kontak` int(11) NOT NULL,
+  `nama` varchar(30) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `subject` varchar(65) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `kontak`
+--
+
+INSERT INTO `kontak` (`id_kontak`, `nama`, `email`, `subject`) VALUES
+(1, 'sjdfkj', 'sdkljsdj@gmail.com', 'sdksdksd'),
+(2, 'aji', 'aji@gmail.com', 'sdnhsdsdksdj'),
+(3, 'iyos', 'iyos@gmail.com', 'ksskdkdsdsk');
 
 -- --------------------------------------------------------
 
@@ -433,7 +498,7 @@ CREATE TABLE `ms_gejala` (
   `id_ms_kategori_gejala` int(11) DEFAULT NULL,
   `kode_gejala` varchar(255) DEFAULT NULL,
   `nama_gejala` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `ms_gejala`
@@ -490,7 +555,7 @@ INSERT INTO `ms_gejala` (`id_ms_gejala`, `id_ms_kategori_gejala`, `kode_gejala`,
 CREATE TABLE `ms_kategori_gejala` (
   `id_ms_kategori_gejala` int(11) NOT NULL,
   `nama_ms_kategori` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `ms_kategori_gejala`
@@ -520,7 +585,7 @@ CREATE TABLE `ms_penyakit` (
   `kode_penyakit` varchar(255) DEFAULT NULL,
   `nama_penyakit` varchar(255) DEFAULT NULL,
   `solusi_penyakit` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `ms_penyakit`
@@ -565,7 +630,16 @@ CREATE TABLE `register` (
   `jenis_kelamin` char(1) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `register`
+--
+
+INSERT INTO `register` (`id`, `id_user`, `nama`, `alamat`, `no_tlp`, `tanggal_lahir`, `jenis_kelamin`, `created_at`, `updated_at`) VALUES
+(11, 13, 'Nugget', 'Jagiran Lor', '0989289484', '2022-12-25', 'L', '2022-12-25 03:50:46', '2022-12-25 03:50:46'),
+(12, 14, 'Yoga', 'Jakarta', '08474774', '2022-12-14', 'L', '2022-12-25 05:27:05', '2022-12-25 05:27:05'),
+(13, 15, 'Yahya', 'jagiran', '08976533', '2008-01-30', 'L', '2022-12-25 05:27:58', '2022-12-25 05:27:58');
 
 -- --------------------------------------------------------
 
@@ -576,7 +650,7 @@ CREATE TABLE `register` (
 CREATE TABLE `role` (
   `id` int(11) NOT NULL,
   `nama_role` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `role`
@@ -596,7 +670,7 @@ CREATE TABLE `rule` (
   `id_rule` int(11) NOT NULL,
   `id_ms_penyakit` int(11) DEFAULT NULL,
   `gejala` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `rule`
@@ -637,7 +711,7 @@ CREATE TABLE `rule_breadth` (
   `parent_ms_gejala` int(11) DEFAULT NULL,
   `child_ms_gejala` int(11) DEFAULT NULL,
   `id_ms_penyakit` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `rule_breadth`
@@ -951,7 +1025,7 @@ CREATE TABLE `tmp_konsultasi` (
   `id_prev_gejala` int(11) DEFAULT NULL,
   `id_user` int(11) DEFAULT NULL,
   `answer` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -966,7 +1040,7 @@ CREATE TABLE `users` (
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -974,7 +1048,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `id_role`, `nama_user`, `username`, `password`, `created_at`) VALUES
 (1, 1, 'Aan Super Admin', 'aan_admin', 'e10adc3949ba59abbe56e057f20f883e', '2022-10-15 15:24:00'),
-(2, 2, 'Aan User', 'aan_user', 'e10adc3949ba59abbe56e057f20f883e', '2022-10-15 15:24:00');
+(2, 2, 'Aan User', 'aan_user', 'e10adc3949ba59abbe56e057f20f883e', '2022-10-15 15:24:00'),
+(13, 2, 'Nugget', 'nu99etz', 'e10adc3949ba59abbe56e057f20f883e', '2022-12-25 03:50:46'),
+(14, 2, 'Yoga', 'yoga1234', 'e10adc3949ba59abbe56e057f20f883e', '2022-12-25 05:27:05'),
+(15, 2, 'Yahya', 'yahya123', 'e10adc3949ba59abbe56e057f20f883e', '2022-12-25 05:27:58');
 
 --
 -- Indexes for dumped tables
@@ -1010,6 +1087,12 @@ ALTER TABLE `detail_konsultasi_penyakit`
 ALTER TABLE `konsultasi`
   ADD PRIMARY KEY (`id_konsultasi`),
   ADD KEY `id_user` (`id_user`);
+
+--
+-- Indexes for table `kontak`
+--
+ALTER TABLE `kontak`
+  ADD PRIMARY KEY (`id_kontak`);
 
 --
 -- Indexes for table `ms_gejala`
@@ -1090,19 +1173,25 @@ ALTER TABLE `certainly_factor`
 -- AUTO_INCREMENT for table `detail_konsultasi_gejala`
 --
 ALTER TABLE `detail_konsultasi_gejala`
-  MODIFY `id_detail_konsultasi_gejala` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_detail_konsultasi_gejala` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `detail_konsultasi_penyakit`
 --
 ALTER TABLE `detail_konsultasi_penyakit`
-  MODIFY `id_detail_konsultasi_penyakit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_detail_konsultasi_penyakit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `konsultasi`
 --
 ALTER TABLE `konsultasi`
-  MODIFY `id_konsultasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_konsultasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `kontak`
+--
+ALTER TABLE `kontak`
+  MODIFY `id_kontak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ms_gejala`
@@ -1126,7 +1215,7 @@ ALTER TABLE `ms_penyakit`
 -- AUTO_INCREMENT for table `register`
 --
 ALTER TABLE `register`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -1156,7 +1245,7 @@ ALTER TABLE `tmp_konsultasi`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
