@@ -115,11 +115,42 @@ class KonsultasiController extends MainController
     }
 
     private function calculateForwardChaining()
-    {
-        foreach($this->tempPenyakit as $valuePenyakit) {
-            $
-            foreach
+    {   
+        $dataMatch = [];
+        foreach($this->groupByPenyakit as $valueGroupByPenyakit) {
+            $match = 0;
+            foreach($this->tempPenyakit as $valueTempByPenyakit) {
+                if(in_array($valueGroupByPenyakit, $valueTempByPenyakit)) {
+                    $match += 1;
+                }
+            }
+            if($match > 2) {
+                $dataMatch[] = $valueGroupByPenyakit;
+            }
         }
+        return $dataMatch;
+    }
+
+    private function matchingPenyakit($idPenyakit, $choiceGejala)
+    {
+        $rule_fc = $this->db->select('*')->from('certainly_factor')->where(['id_penyakit' => $idPenyakit])->get()->result_array();
+        $totalAllGejala = count($rule_fc);
+        if($totalAllGejala > 0) {
+            $matchGejala = 0;
+            foreach($rule_fc as $value) {
+                if(in_array($value['id_gejala'], $choiceGejala)) {
+                    $matchGejala += 1;
+                }
+            }
+
+            if($matchGejala == $totalAllGejala) {
+                return true;
+            }
+
+            return false;
+        }
+
+        return null;
     }
 
     // private function getForwardChainning($answer)
@@ -139,6 +170,8 @@ class KonsultasiController extends MainController
     //             }
     //         }
     //     }
+
+    //     $this->maintence->Debug($penyakitNode);
 
     //     if (!empty($nodeJawabanYa)) {
     //         $implodeJawabanYa = implode(',', $nodeJawabanYa);
@@ -218,46 +251,45 @@ class KonsultasiController extends MainController
         }
 
         // eliminate and calculate penyakit more than 3
-        $this->maintence->Debug($this->groupByPenyakit);
+        $penyakitNode = $this->calculateForwardChaining();
 
-
+        // $this->maintence->Debug($nodeJawabanYa);
 
         if (!empty($nodeJawabanYa)) {
-            $implodeJawabanYa = implode(',', $nodeJawabanYa);
             if (!empty($penyakitNode)) {
-                // cocokan node dan hasil query dari aturan
-                $match = [];
+                $idMatchPenyakit = null;
+                $tempPenyakitMatch = [];
                 for ($i = 0; $i < count($penyakitNode); $i++) {
-                    for ($j = 0; $j < count($penyakitNode[$i]); $j++) {
-                        if ($implodeJawabanYa == $penyakitNode[$i][$j]['gejala']) {
-                            $match[$penyakitNode[$i][$j]['id_ms_penyakit']] = 0;
-                        } else {
-                            $match[$penyakitNode[$i][$j]['id_ms_penyakit']] = 1;
+                    // cek matching penyakit sesuai gejala
+                    $match = $this->matchingPenyakit($penyakitNode[$i], $nodeJawabanYa);
+                    if($match == true) {
+                        $tempPenyakitMatch[] = $penyakitNode[$i];
+                    }
+                }
+
+                if(!empty($tempPenyakitMatch)) {
+                    if(count($tempPenyakitMatch) == 1) {
+                        $penyakit = [];
+                        $penyakit[] = $this->getPenyakit($tempPenyakitMatch[0]);
+                        $kemungkinan = 1;
+                    } else if(count($tempPenyakitMatch) > 1) {
+                        $penyakit = [];
+                        foreach ($penyakitNode as $valuePenyakitNode) {
+                            $penyakit[] = $this->getPenyakit($valuePenyakitNode);
                         }
+                        $kemungkinan = 0;
+                    } else {
+                        $penyakit = [];
+                        $kemungkinan = 0;
                     }
-                }
-
-                // cek apakah ada nilai 0 dalam setiap kecocokan node
-                foreach ($match as $key => $value) {
-                    if ($value == 0) {
-                        $cekPenyakit = $key;
-                    }
-                }
-
-                if (empty($cekPenyakit)) {
-                    $penyakit = [];
-                    foreach ($match as $key => $value) {
-                        $penyakit[] = $this->getPenyakit($key);
-                    }
-                    $kemungkinan = 0;
                 } else {
                     $penyakit = [];
-                    $penyakit[] = $this->getPenyakit($cekPenyakit);
-                    $kemungkinan = 1;
+                    $kemungkinan = 0;
                 }
+
             } else {
                 $penyakit = [];
-                $kemungkinan = 1;
+                $kemungkinan = 0;
             }
 
             // mapping jawaban iya
@@ -282,19 +314,26 @@ class KonsultasiController extends MainController
 
     private function calculateCertainlyFactor($data, $answer)
     {
+        $temp_cf = [];
         foreach ($data as $key => $value) {
             $cf = 0;
             $cfk = 0;
             $total = 0;
-            $temp_cf = [];
+            $cf_2 = 0;
+            $cf_arr = [];
             foreach ($answer as $key_answer => $value_answer) {
                 if ($value['id_gejala'] == $key_answer) {
                     $cf = ($value['mb_value'] - $value['md_value']) * $value_answer;
                     $temp_cf[] = $cf;
-                    if ($cfk == 0) {
-                        $cfk = $cf + (0 * (1 - $cf));
+                }
+            }
+
+            if(count($temp_cf) > 2) {
+                for($i = 0; $i < count($temp_cf) - 1; $i++) {
+                    if($cfk == 0) {
+                        $cfk = $temp_cf[$i] + ($temp_cf[$i + 1] * (1 - $temp_cf[$i]));
                     } else {
-                        $cfk = $cfk + ($cf * (1 - $cfk));
+                        $cfk = $cfk + ($temp_cf[$i + 1] * (1 - $cfk));
                     }
                 }
             }

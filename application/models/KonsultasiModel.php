@@ -116,7 +116,7 @@ class KonsultasiModel extends CI_Model
 
     public function historyKonsultasi($param = null)
     {
-        $history = $this->db->select('*')->from('konsultasi');
+        $history = $this->db->select('*')->from('konsultasi')->order_by('id_konsultasi', 'desc');
         if ($param != null) {
             $history->where($param);
         }
