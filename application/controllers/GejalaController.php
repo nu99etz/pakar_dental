@@ -141,7 +141,7 @@ class GejalaController extends MainController
     {
         $data = $this->import_excel($_FILES['upload'], 'xlsx');
 
-        $this->maintence->Debug($data);
+        // $this->maintence->Debug($data);
 
         if ($data['status'] == 500) {
             $response = [

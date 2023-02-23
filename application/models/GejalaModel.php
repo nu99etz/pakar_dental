@@ -172,7 +172,8 @@ class GejalaModel extends CI_Model
 
                     $row['id_ms_gejala'] = $id;
                     $row['kode_gejala'] = $kodeGejala;
-                    $row['nama_gejala'] = ucwords($value[1]);
+                    $row['id_ms_kategori_gejala'] = $value[1];
+                    $row['nama_gejala'] = ucwords($value[2]);
 
                     $this->db->insert('ms_gejala', $row);
                 }

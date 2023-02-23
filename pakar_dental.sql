@@ -1,627 +1,252 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
+-- MariaDB dump 10.19  Distrib 10.5.18-MariaDB, for debian-linux-gnu (x86_64)
 --
--- Host: localhost
--- Generation Time: Dec 28, 2022 at 12:56 PM
--- Server version: 10.9.4-MariaDB
--- PHP Version: 8.1.13
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- Host: localhost    Database: pakar_dental
+-- ------------------------------------------------------
+-- Server version	10.5.18-MariaDB-0+deb11u1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `pakar_dental`
---
-
--- --------------------------------------------------------
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `certainly_factor`
 --
 
+DROP TABLE IF EXISTS `certainly_factor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `certainly_factor` (
-  `id_certainly_factor` int(11) NOT NULL,
+  `id_certainly_factor` int(11) NOT NULL AUTO_INCREMENT,
   `id_gejala` int(11) DEFAULT NULL,
   `id_penyakit` int(11) DEFAULT NULL,
   `mb_value` float DEFAULT NULL,
-  `md_value` float DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `md_value` float DEFAULT NULL,
+  PRIMARY KEY (`id_certainly_factor`),
+  KEY `id_gejala` (`id_gejala`),
+  KEY `id_penyakit` (`id_penyakit`),
+  CONSTRAINT `certainly_factor_ibfk_1` FOREIGN KEY (`id_gejala`) REFERENCES `ms_gejala` (`id_ms_gejala`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `certainly_factor_ibfk_2` FOREIGN KEY (`id_penyakit`) REFERENCES `ms_penyakit` (`id_ms_penyakit`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=583 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `certainly_factor`
 --
 
-INSERT INTO `certainly_factor` (`id_certainly_factor`, `id_gejala`, `id_penyakit`, `mb_value`, `md_value`) VALUES
-(1, 1, 2, 0.5, 1),
-(2, 2, 2, 0.9, 1),
-(3, 3, 2, 1, 0.8),
-(4, 5, 2, 0.5, 0.6),
-(5, 6, 2, 0.4, 0.6),
-(6, 7, 2, 1, 0.3),
-(7, 8, 2, 0.5, 0.2),
-(8, 9, 2, 0.6, 1),
-(9, 10, 2, 0.6, 0.5),
-(10, 12, 2, 0.4, 0.9),
-(11, 19, 2, 0.5, 0.3),
-(12, 20, 2, 1, 0.3),
-(13, 22, 2, 0.5, 0.4),
-(14, 24, 2, 0.9, 0.4),
-(15, 28, 2, 0.6, 0.4),
-(16, 29, 2, 0.3, 0.1),
-(17, 34, 2, 0.5, 0.4),
-(18, 36, 2, 1, 0.9),
-(19, 38, 2, 0.4, 0.3),
-(20, 40, 2, 0.7, 1),
-(21, 1, 1, 1, 0.5),
-(22, 2, 1, 0.5, 0.6),
-(23, 3, 1, 1, 1),
-(24, 5, 1, 0.7, 0.4),
-(25, 6, 1, 0.9, 1),
-(26, 7, 1, 0.5, 0.6),
-(27, 8, 1, 0.8, 0.3),
-(28, 9, 1, 1, 0.2),
-(29, 10, 1, 0.5, 0.9),
-(30, 12, 1, 0.7, 1),
-(31, 19, 1, 1, 0.5),
-(32, 20, 1, 0.4, 0.7),
-(33, 21, 1, 0.3, 0.9),
-(34, 22, 1, 1, 0.4),
-(35, 24, 1, 0.5, 0.9),
-(36, 25, 1, 0.7, 0.9),
-(37, 27, 1, 0.3, 0.4),
-(38, 28, 1, 0.5, 0.4),
-(39, 29, 1, 0.3, 1),
-(40, 33, 1, 0.9, 0.5),
-(41, 34, 1, 0.2, 0.9),
-(42, 35, 1, 0.3, 1),
-(43, 38, 1, 0.8, 0.3),
-(44, 40, 1, 1, 0.7),
-(45, 1, 3, 1, 0.4),
-(46, 2, 3, 0.5, 0.9),
-(47, 3, 3, 0.4, 0.6),
-(48, 5, 3, 0.3, 0.5),
-(49, 6, 3, 0.7, 0.8),
-(50, 7, 3, 0.6, 1),
-(51, 8, 3, 0.5, 1),
-(52, 9, 3, 0.3, 0.5),
-(53, 10, 3, 0.4, 0.9),
-(54, 12, 3, 0.4, 0.5),
-(55, 19, 3, 0.9, 0.4),
-(56, 20, 3, 0.2, 1),
-(57, 22, 3, 0.4, 0.8),
-(58, 24, 3, 0.3, 0.8),
-(59, 25, 3, 0.5, 1),
-(60, 27, 3, 0.9, 1),
-(61, 28, 3, 1, 0.5),
-(62, 29, 3, 1, 0.9),
-(63, 33, 3, 0.5, 0.4),
-(64, 34, 3, 0.8, 0.4),
-(65, 36, 3, 0.6, 0.4),
-(66, 38, 3, 0.8, 0.9),
-(67, 39, 3, 0.6, 0.4),
-(68, 40, 3, 0.8, 0.4),
-(69, 1, 4, 0.5, 1),
-(70, 2, 4, 0.2, 0.9),
-(71, 3, 4, 0.5, 0.6),
-(72, 5, 4, 0.7, 0.5),
-(73, 6, 4, 0.3, 0.1),
-(74, 7, 4, 0.4, 0.5),
-(75, 8, 4, 1, 0.8),
-(76, 9, 4, 0.9, 0.4),
-(77, 10, 4, 0.6, 0.1),
-(78, 11, 4, 1, 0.5),
-(79, 12, 4, 0.6, 0.5),
-(80, 13, 4, 0.6, 0.4),
-(81, 14, 4, 0.3, 0.2),
-(82, 18, 4, 0.7, 0.9),
-(83, 20, 4, 1, 0.5),
-(84, 21, 4, 0.4, 1),
-(85, 22, 4, 0.6, 0.4),
-(86, 27, 4, 0.8, 0.9),
-(87, 28, 4, 0.4, 0.5),
-(88, 29, 4, 0.3, 0.4),
-(89, 30, 4, 0.9, 0.5),
-(90, 31, 4, 0.4, 0.8),
-(91, 33, 4, 0.5, 1),
-(92, 34, 4, 1, 0.6),
-(93, 36, 4, 0.7, 0.9),
-(94, 37, 4, 0.3, 1),
-(95, 40, 4, 0.5, 0.3),
-(96, 2, 5, 0.5, 0.6),
-(97, 5, 5, 1, 0.5),
-(98, 16, 5, 0.5, 1),
-(99, 19, 5, 0.9, 0.4),
-(100, 20, 5, 0.6, 0.4),
-(101, 23, 5, 0.8, 0.9),
-(102, 35, 5, 0.7, 0.6),
-(103, 38, 5, 0.3, 0.5),
-(104, 39, 5, 0.7, 0.6),
-(105, 1, 6, 0.5, 0.7),
-(106, 2, 6, 0.6, 0.4),
-(107, 3, 6, 0.1, 1),
-(108, 5, 6, 0.5, 0.3),
-(109, 6, 6, 0.5, 0.4),
-(110, 7, 6, 0.9, 0.6),
-(111, 8, 6, 0.4, 0.5),
-(112, 9, 6, 0.7, 0.8),
-(113, 10, 6, 0.9, 0.3),
-(114, 11, 6, 0.4, 0.5),
-(115, 12, 6, 0.6, 0.4),
-(116, 19, 6, 0.3, 0.5),
-(117, 20, 6, 0.7, 0.4),
-(118, 23, 6, 0.5, 0.9),
-(119, 24, 6, 0.6, 0.4),
-(120, 35, 6, 0.5, 0.3),
-(121, 38, 6, 1, 0.6),
-(122, 1, 7, 1, 0.2),
-(123, 2, 7, 0.5, 0.9),
-(124, 11, 7, 0.4, 0.5),
-(125, 12, 7, 0.6, 0.8),
-(126, 15, 7, 0.4, 0.5),
-(127, 18, 7, 1, 0.4),
-(128, 21, 7, 0.3, 0.8),
-(129, 22, 7, 0.4, 0.1),
-(130, 23, 7, 0.5, 1),
-(131, 25, 7, 0.6, 0.7),
-(132, 28, 7, 0.8, 0.9),
-(133, 29, 7, 0.4, 0.5),
-(134, 36, 7, 0.6, 0.5),
-(135, 40, 7, 1, 0.3),
-(136, 1, 8, 0.6, 0.4),
-(137, 2, 8, 0.8, 0.4),
-(138, 4, 8, 0.5, 0.4),
-(139, 11, 8, 0.8, 0.4),
-(140, 18, 8, 0.5, 1),
-(141, 21, 8, 0.5, 0.3),
-(142, 22, 8, 1, 0.9),
-(143, 25, 8, 0.5, 0.4),
-(144, 28, 8, 0.6, 1),
-(145, 29, 8, 0.5, 0.4),
-(146, 34, 8, 0.6, 0.5),
-(147, 36, 8, 0.8, 0.4),
-(148, 37, 8, 0.5, 0.7),
-(149, 40, 8, 0.6, 0.8),
-(150, 1, 9, 0.5, 0.7),
-(151, 2, 9, 0.6, 1),
-(152, 3, 9, 0.5, 0.4),
-(153, 4, 9, 0.9, 0.3),
-(154, 12, 9, 0.4, 0.9),
-(155, 13, 9, 0.4, 0.1),
-(156, 18, 9, 0.5, 0.9),
-(157, 21, 9, 1, 0.3),
-(158, 22, 9, 0.5, 0.9),
-(159, 25, 9, 0.4, 0.8),
-(160, 31, 9, 0.6, 0.7),
-(161, 35, 9, 0.9, 0.5),
-(162, 37, 9, 0.3, 0.8),
-(163, 40, 9, 0.7, 0.4),
-(164, 5, 10, 1, 0.5),
-(165, 14, 10, 0.9, 0.4),
-(166, 21, 10, 0.6, 0.3),
-(167, 23, 10, 0.8, 0.9),
-(168, 24, 10, 1, 0.5),
-(169, 2, 12, 1, 0.5),
-(170, 8, 12, 0.8, 1),
-(171, 13, 12, 0.9, 0.5),
-(172, 14, 12, 0.4, 0.7),
-(173, 20, 12, 1, 0.5),
-(174, 22, 12, 0.9, 0.4),
-(175, 27, 12, 0.5, 1),
-(176, 28, 12, 0.6, 0.8),
-(177, 29, 12, 0.7, 0.3),
-(178, 33, 12, 0.4, 0.9),
-(179, 34, 12, 0.4, 0.3),
-(180, 36, 12, 0.7, 0.2),
-(181, 38, 12, 1, 0.3),
-(182, 40, 12, 0.8, 0.7),
-(183, 4, 13, 0.4, 0.9),
-(184, 5, 13, 1, 0.3),
-(185, 14, 13, 0.9, 0.6),
-(186, 21, 13, 0.3, 0.7),
-(187, 23, 13, 1, 0.9),
-(188, 1, 14, 0.7, 0.9),
-(189, 2, 14, 1, 0.6),
-(190, 3, 14, 0.3, 0.4),
-(191, 4, 14, 0.9, 1),
-(192, 5, 14, 0.6, 0.4),
-(193, 6, 14, 0.8, 0.7),
-(194, 7, 14, 1, 0.3),
-(195, 8, 14, 0.5, 0.7),
-(196, 9, 14, 1, 0.9),
-(197, 10, 14, 0.6, 0.3),
-(198, 12, 14, 0.5, 1),
-(199, 13, 14, 0.9, 0.4),
-(200, 14, 14, 0.5, 0.2),
-(201, 16, 14, 0.3, 0.4),
-(202, 18, 14, 0.8, 0.7),
-(203, 21, 14, 0.6, 0.5),
-(204, 22, 14, 1, 0.4),
-(205, 24, 14, 0.8, 0.4),
-(206, 29, 14, 0.3, 0.4),
-(207, 31, 14, 0.8, 0.7),
-(208, 35, 14, 1, 0.2),
-(209, 37, 14, 0.8, 0.9),
-(210, 40, 14, 1, 0.2),
-(211, 2, 15, 0.6, 0.4),
-(212, 8, 15, 0.9, 0.5),
-(213, 13, 15, 0.4, 0.8),
-(214, 21, 15, 0.3, 0.7),
-(215, 23, 15, 1, 0.5),
-(216, 28, 15, 0.9, 0.7),
-(217, 29, 15, 0.5, 0.9),
-(218, 34, 15, 0.4, 0.7),
-(219, 36, 15, 0.3, 0.4),
-(220, 38, 15, 0.5, 0.8),
-(221, 40, 15, 0.9, 0.4),
-(222, 5, 16, 0.6, 1),
-(223, 10, 16, 0.25, 0.7),
-(224, 15, 16, 1, 0.2),
-(225, 21, 16, 0.9, 0.4),
-(226, 23, 16, 0.5, 0.3),
-(227, 26, 16, 0.8, 0.7),
-(228, 36, 16, 0.4, 0.3),
-(229, 38, 16, 0.7, 0.2),
-(230, 40, 16, 0.4, 0.5),
-(231, 1, 17, 1, 0.8),
-(232, 2, 17, 0.3, 0.5),
-(233, 3, 17, 0.4, 1),
-(234, 4, 17, 0.9, 0.4),
-(235, 6, 17, 0.4, 0.8),
-(236, 7, 17, 0.3, 0.4),
-(237, 11, 17, 0.9, 0.7),
-(238, 12, 17, 0.5, 0.6),
-(239, 16, 17, 0.4, 0.5),
-(240, 20, 17, 0.9, 0.7),
-(241, 22, 17, 0.3, 0.4),
-(242, 36, 17, 1, 0.5),
-(243, 38, 17, 0.8, 0.9),
-(244, 40, 17, 0.4, 0.7),
-(245, 1, 18, 0.4, 0.1),
-(246, 4, 18, 0.6, 1),
-(247, 5, 18, 0.8, 0.7),
-(248, 6, 18, 1, 0.9),
-(249, 7, 18, 0.4, 0.6),
-(250, 8, 18, 0.3, 0.4),
-(251, 9, 18, 0.8, 0.7),
-(252, 10, 18, 0.6, 0.4),
-(253, 11, 18, 0.3, 0.1),
-(254, 12, 18, 0.4, 0.7),
-(255, 21, 18, 0.9, 0.3),
-(256, 22, 18, 0.4, 0.8),
-(257, 26, 18, 0.9, 1),
-(258, 29, 18, 1, 0.5),
-(259, 36, 18, 0.6, 0.8),
-(260, 38, 18, 0.7, 0.9),
-(261, 39, 18, 0.4, 0.7),
-(262, 8, 19, 0.6, 0.8),
-(263, 17, 19, 0.4, 0.1),
-(264, 21, 19, 0.5, 1),
-(265, 22, 19, 0.7, 0.9),
-(266, 36, 19, 0.4, 0.6),
-(267, 38, 19, 0.4, 0.5),
-(268, 40, 19, 1, 0.5),
-(269, 2, 20, 0.8, 0.9),
-(270, 8, 20, 0.4, 0.5),
-(271, 14, 20, 0.8, 0.3),
-(272, 21, 20, 0.6, 0.4),
-(273, 22, 20, 1, 0.4),
-(274, 28, 20, 0.5, 0.7),
-(275, 29, 20, 0.4, 0.8),
-(276, 33, 20, 0.9, 0.4),
-(277, 34, 20, 0.8, 0.4),
-(278, 36, 20, 0.6, 0.7),
-(279, 38, 20, 0.5, 0.8),
-(280, 40, 20, 0.9, 1),
-(281, 10, 21, 0.3, 0.7),
-(282, 16, 21, 0.7, 0.9),
-(283, 21, 21, 0.4, 0.5),
-(284, 23, 21, 0.6, 0.4),
-(285, 35, 21, 0.5, 0.3),
-(286, 37, 21, 0.9, 0.5),
-(287, 40, 21, 0.4, 0.1),
-(288, 10, 22, 0.4, 0.8),
-(289, 16, 22, 1, 0.2),
-(290, 21, 22, 0.8, 0.5),
-(291, 23, 22, 1, 0.4),
-(292, 35, 22, 0.6, 0.7),
-(293, 37, 22, 0.8, 0.9),
-(294, 40, 22, 1, 0.5);
-
--- --------------------------------------------------------
+LOCK TABLES `certainly_factor` WRITE;
+/*!40000 ALTER TABLE `certainly_factor` DISABLE KEYS */;
+INSERT INTO `certainly_factor` VALUES (298,1,1,1,0.1),(299,2,1,1,0.1),(300,3,1,1,0.6),(301,5,1,1,0),(302,6,1,0.8,0.2),(303,7,1,0.9,0.2),(304,8,1,0.8,0.1),(305,9,1,0.5,0.2),(306,10,1,0.5,0.3),(307,12,1,1,0),(308,19,1,0.9,0.6),(309,20,1,0.9,0.4),(310,21,1,1,0),(311,22,1,0.7,0.3),(312,24,1,0.7,0.3),(313,25,1,0.8,0.4),(314,26,1,0.9,0.2),(315,27,1,0.8,0.2),(316,28,1,0.5,0.2),(317,32,1,0.7,0.3),(318,33,1,0.8,0.4),(319,34,1,0.5,0.2),(320,37,1,0.9,0.3),(321,39,1,0.9,0.2),(322,1,2,0.8,0.5),(323,2,2,0.9,0.2),(324,3,2,0.8,0.1),(325,5,2,1,0),(326,6,2,0.8,0.2),(327,7,2,0.9,0.1),(328,8,2,0.7,0.3),(329,9,2,0.5,0.2),(330,10,2,0.5,0.2),(331,12,2,1,0),(332,19,2,0.7,0.2),(333,20,2,0.8,0.2),(334,22,2,0.9,0.1),(335,24,2,0.9,0.1),(336,25,2,0.7,0.4),(337,27,2,0.7,0.5),(338,28,2,0.5,0.2),(339,33,2,0.8,0.4),(340,35,2,0.4,0.2),(341,37,2,0.5,0.3),(342,39,2,0.8,0.2),(343,1,3,0.8,0.3),(344,2,3,0.8,0.1),(345,3,3,0.8,0.1),(346,5,3,1,0),(347,6,3,0.8,0.1),(348,7,3,0.9,0.1),(349,8,3,0.7,0.3),(350,9,3,0.5,0.2),(351,10,3,0.9,0.2),(352,12,3,1,0),(353,19,3,0.8,0.4),(354,20,3,0.7,0.4),(355,22,3,0.8,0.2),(356,24,3,0.8,0.5),(357,25,3,0.9,0.2),(358,26,3,0.8,0.1),(359,27,3,0.9,0.4),(360,28,3,0.5,0.2),(361,32,3,0.7,0.3),(362,33,3,0.8,0.4),(363,35,3,0.4,0.2),(364,37,3,0.5,0.3),(365,38,3,0.7,0.1),(366,39,3,0.7,0.1),(367,1,4,0.8,0.5),(368,2,4,0.8,0.2),(369,3,4,0.8,0.6),(370,5,4,0.8,0.1),(371,6,4,0.7,0.1),(372,7,4,0.9,0.1),(373,8,4,0.8,0.3),(374,9,4,0.7,0.3),(375,10,4,0.7,0.1),(376,11,4,0.8,0.4),(377,12,4,0.8,0.3),(378,13,4,0.8,0.2),(379,14,4,0.9,0.1),(380,16,4,0.8,0.5),(381,20,4,0.8,0.2),(382,21,4,0.5,0.1),(383,22,4,0.6,0.1),(384,26,4,0.7,0.2),(385,27,4,0.9,0.3),(386,28,4,0.8,0.2),(387,29,4,0.7,0.3),(388,30,4,0.7,0.3),(389,32,4,0.7,0.3),(390,33,4,0.6,0.2),(391,35,4,0.4,0.2),(392,36,4,0.9,0.3),(393,39,4,0.5,0.1),(394,1,5,1,0.1),(395,2,5,1,0.1),(396,5,5,1,0.1),(397,16,5,0.8,0.2),(398,19,5,0.7,0.3),(399,20,5,0.9,0.5),(400,22,5,0.6,0.1),(401,34,5,0.8,0.2),(402,37,5,0.2,0.1),(403,38,5,0.8,0.2),(404,1,6,0.8,0.1),(405,2,6,1,0.1),(406,3,6,0.5,0.1),(407,5,6,1,0.1),(408,6,6,0.8,0.1),(409,7,6,0.8,0.1),(410,8,6,0.9,0.2),(411,9,6,0.5,0.1),(412,10,6,0.6,0.2),(413,11,6,0.7,0.5),(414,12,6,1,0),(415,19,6,0.8,0.1),(416,20,6,0.7,0.1),(417,22,6,0.9,0.1),(418,24,6,0.9,0.1),(419,31,6,0.7,0.3),(420,34,6,0.5,0.3),(421,37,6,0.6,0.1),(422,1,7,0.6,0.1),(423,2,7,0.8,0.3),(424,4,7,0.8,0.3),(425,11,7,1,0.1),(426,12,7,0.7,0.1),(427,13,7,0.9,0.1),(428,14,7,0.9,0.3),(429,18,7,0.7,0.1),(430,21,7,0.9,0.2),(431,22,7,0.9,0.2),(432,25,7,0.8,0.3),(433,27,7,0.8,0.2),(434,28,7,0.8,0.2),(435,33,7,0.7,0.2),(436,35,7,0.4,0.2),(437,39,7,0,0),(438,1,8,0.7,0.3),(439,2,8,0.6,0.1),(440,4,8,1,0),(441,11,8,0.7,0.3),(442,18,8,0.9,0.1),(443,21,8,0.7,0.1),(444,22,8,0.7,0.4),(445,25,8,0.9,0.2),(446,26,8,0.7,0.3),(447,27,8,0,0),(448,28,8,0.7,0.1),(449,33,8,0.7,0.4),(450,35,8,0.5,0.2),(451,36,8,0.8,0.1),(452,39,8,0,0),(453,1,9,0.8,0.2),(454,2,9,0.8,0.3),(455,3,9,0.6,0.2),(456,4,9,1,0),(457,12,9,0.8,0.4),(458,13,9,0.8,0.1),(459,18,9,0.6,0.1),(460,21,9,0.8,0.2),(461,22,9,0.6,0.1),(462,24,9,1,0),(463,25,9,0.8,0.4),(464,30,9,0,0),(465,34,9,0.5,0.3),(466,36,9,0.9,0.2),(467,39,9,0,0),(468,5,10,1,0),(469,14,10,0.8,0.1),(470,21,10,0.7,0.1),(471,23,10,0.9,0.6),(472,24,10,0.8,0.2),(473,1,11,0.7,0.3),(474,2,11,0.9,0.2),(475,10,11,0.7,0.2),(476,12,11,0.8,0.3),(477,13,11,0.8,0.2),(478,21,11,0.7,0.1),(479,2,12,0.4,0.1),(480,8,12,1,0.1),(481,13,12,0.7,0.2),(482,14,12,0.7,0.2),(483,20,12,0.8,0.2),(484,22,12,0.9,0.2),(485,26,12,0.9,0.3),(486,27,12,0.8,0.2),(487,28,12,0.5,0.2),(488,32,12,0.7,0.3),(489,33,12,0.7,0.3),(490,35,12,0.5,0.2),(491,37,12,0.3,0.1),(492,39,12,0.5,0.1),(493,4,13,0.8,0.4),(494,5,13,0.8,0.1),(495,6,13,0.7,0.3),(496,7,13,0.6,0.3),(497,14,13,0.8,0.2),(498,21,13,0.8,0.2),(499,23,13,0.8,0.2),(500,1,14,1,0.2),(501,2,14,1,0.1),(502,3,14,0.8,0.1),(503,4,14,1,0.1),(504,5,14,0.7,0.2),(505,6,14,0.8,0.5),(506,7,14,0.7,0.1),(507,8,14,0.9,0.1),(508,9,14,1,0.1),(509,10,14,0.8,0.4),(510,12,14,1,0),(511,13,14,0.9,0.2),(512,14,14,0.8,0.2),(513,16,14,0.7,0.2),(514,21,14,1,0),(515,22,14,0.5,0.1),(516,24,14,0.8,0.2),(517,28,14,0.5,0.2),(518,30,14,0.8,0.3),(519,34,14,0.9,0.2),(520,35,14,0.9,0.1),(521,36,14,0.9,0.2),(522,38,14,0.7,0.2),(523,39,14,0,0),(524,2,15,0.5,0.2),(525,8,15,1,0),(526,13,15,0.8,0.2),(527,21,15,0.8,0.2),(528,23,15,0.7,0.2),(529,27,15,0.9,0.3),(530,28,15,0.5,0.2),(531,33,15,0.8,0.3),(532,35,15,0.5,0.2),(533,37,15,0.3,0.2),(534,39,15,0,0),(535,5,16,0.5,0.1),(536,6,16,0.5,0.1),(537,15,16,1,0.3),(538,1,17,1,0.1),(539,2,17,0.8,0.1),(540,3,17,0.7,0.3),(541,4,17,1,0),(542,11,17,0.8,0.4),(543,12,17,0.9,0.4),(544,16,17,0.5,0.2),(545,20,17,0.7,0.2),(546,22,17,0.9,0.1),(547,35,17,0.9,0.3),(548,37,17,0.5,0.2),(549,39,17,0.5,0.2),(550,2,18,0.7,0.1),(551,8,18,1,0),(552,14,18,0.8,0.2),(553,21,18,0.9,0.2),(554,22,18,0.9,0.1),(555,27,18,0.9,0.5),(556,28,18,0.6,0.2),(557,32,18,0.6,0.1),(558,33,18,0.5,0.2),(559,35,18,0.9,0.3),(560,37,18,0,0),(561,39,18,0.5,0.2),(562,8,19,1,0),(563,17,19,1,0.1),(564,21,19,0.8,0.2),(565,22,19,0.9,0.2),(566,35,19,0.9,0.3),(567,37,19,0,0),(568,39,19,0.5,0.2),(569,10,20,0.9,0.1),(570,16,20,0.7,0.1),(571,21,20,0.9,0.1),(572,22,20,0.8,0.2),(573,34,20,0.9,0.1),(574,36,20,0.8,0.4),(575,39,20,0.5,0.2),(576,10,21,0.9,0.1),(577,16,21,0.7,0.1),(578,21,21,0.9,0.3),(579,22,21,0.8,0.2),(580,34,21,0.8,0.1),(581,36,21,0.9,0.2),(582,39,21,0.5,0.2);
+/*!40000 ALTER TABLE `certainly_factor` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `detail_konsultasi_gejala`
 --
 
+DROP TABLE IF EXISTS `detail_konsultasi_gejala`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `detail_konsultasi_gejala` (
-  `id_detail_konsultasi_gejala` int(11) NOT NULL,
+  `id_detail_konsultasi_gejala` int(11) NOT NULL AUTO_INCREMENT,
   `id_konsultasi` int(11) DEFAULT NULL,
   `id_gejala` int(11) DEFAULT NULL,
-  `nilai_kepercayaan` double DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `nilai_kepercayaan` double DEFAULT NULL,
+  PRIMARY KEY (`id_detail_konsultasi_gejala`),
+  KEY `id_konsultasi` (`id_konsultasi`),
+  KEY `id_gejala` (`id_gejala`),
+  CONSTRAINT `detail_konsultasi_gejala_ibfk_1` FOREIGN KEY (`id_konsultasi`) REFERENCES `konsultasi` (`id_konsultasi`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `detail_konsultasi_gejala_ibfk_2` FOREIGN KEY (`id_gejala`) REFERENCES `ms_gejala` (`id_ms_gejala`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `detail_konsultasi_gejala`
 --
 
-INSERT INTO `detail_konsultasi_gejala` (`id_detail_konsultasi_gejala`, `id_konsultasi`, `id_gejala`, `nilai_kepercayaan`) VALUES
-(1, 3, 1, NULL),
-(2, 3, 2, NULL),
-(3, 3, 3, NULL),
-(4, 3, 7, NULL),
-(5, 3, 9, NULL),
-(6, 3, 15, NULL),
-(7, 3, 18, NULL),
-(8, 3, 20, NULL),
-(9, 3, 22, NULL),
-(10, 3, 25, NULL),
-(11, 3, 29, NULL),
-(12, 3, 34, NULL),
-(13, 3, 36, NULL),
-(14, 3, 38, NULL),
-(15, 3, 39, NULL),
-(16, 4, 1, 0.5),
-(17, 4, 3, 0.4),
-(18, 4, 6, 0.9),
-(19, 4, 8, 0.5),
-(20, 4, 10, 0.6),
-(21, 4, 13, 0.4),
-(22, 4, 15, 0.5),
-(23, 4, 17, 0.7),
-(24, 4, 19, 0.6),
-(25, 4, 21, 0.3),
-(26, 4, 24, 0.7),
-(27, 4, 27, 0.4),
-(28, 4, 30, 0.6),
-(29, 4, 33, 0.1),
-(30, 4, 36, 1),
-(31, 4, 38, 1),
-(32, 4, 40, 1);
-
--- --------------------------------------------------------
+LOCK TABLES `detail_konsultasi_gejala` WRITE;
+/*!40000 ALTER TABLE `detail_konsultasi_gejala` DISABLE KEYS */;
+INSERT INTO `detail_konsultasi_gejala` VALUES (33,5,5,1),(34,5,14,1),(35,5,21,1),(36,5,23,1),(37,6,8,1),(38,6,14,1),(39,6,20,1),(40,6,22,1),(41,6,27,1),(42,6,31,1),(43,6,35,1),(44,6,37,1),(45,6,39,1),(46,7,1,1),(47,7,2,1),(48,7,7,1),(49,7,12,1),(50,7,21,1),(51,7,22,1),(52,7,35,1),(53,7,37,1),(54,7,39,1);
+/*!40000 ALTER TABLE `detail_konsultasi_gejala` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `detail_konsultasi_penyakit`
 --
 
+DROP TABLE IF EXISTS `detail_konsultasi_penyakit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `detail_konsultasi_penyakit` (
-  `id_detail_konsultasi_penyakit` int(11) NOT NULL,
+  `id_detail_konsultasi_penyakit` int(11) NOT NULL AUTO_INCREMENT,
   `id_konsultasi` int(11) DEFAULT NULL,
   `id_penyakit` int(11) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
-  `presentase_cf` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `presentase_cf` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_detail_konsultasi_penyakit`),
+  KEY `detail_konsultasi_penyakit_ibfk_1` (`id_konsultasi`),
+  KEY `detail_konsultasi_penyakit_ibfk_2` (`id_penyakit`),
+  CONSTRAINT `detail_konsultasi_penyakit_ibfk_1` FOREIGN KEY (`id_konsultasi`) REFERENCES `konsultasi` (`id_konsultasi`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `detail_konsultasi_penyakit_ibfk_2` FOREIGN KEY (`id_penyakit`) REFERENCES `ms_penyakit` (`id_ms_penyakit`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `detail_konsultasi_penyakit`
 --
 
-INSERT INTO `detail_konsultasi_penyakit` (`id_detail_konsultasi_penyakit`, `id_konsultasi`, `id_penyakit`, `type`, `presentase_cf`) VALUES
-(1, 3, 2, 1, NULL),
-(2, 3, 1, 1, NULL),
-(3, 3, 3, 1, NULL),
-(4, 3, 4, 1, NULL),
-(5, 3, 6, 1, NULL),
-(6, 3, 7, 1, NULL),
-(7, 3, 8, 1, NULL),
-(8, 3, 9, 1, NULL),
-(9, 3, 14, 1, NULL),
-(10, 3, 17, 1, NULL),
-(11, 3, 18, 1, NULL),
-(12, 3, 6, 2, 28),
-(13, 3, 5, 2, 10),
-(14, 4, 2, 1, NULL),
-(15, 4, 1, 1, NULL),
-(16, 4, 3, 1, NULL),
-(17, 4, 4, 1, NULL),
-(18, 4, 6, 1, NULL),
-(19, 4, 7, 1, NULL),
-(20, 4, 8, 1, NULL),
-(21, 4, 9, 1, NULL),
-(22, 4, 14, 1, NULL),
-(23, 4, 17, 1, NULL),
-(24, 4, 18, 1, NULL),
-(25, 4, 14, 2, 80),
-(26, 4, 7, 2, 70),
-(27, 4, 15, 2, 50),
-(28, 4, 19, 2, 50),
-(29, 4, 22, 2, 50),
-(30, 4, 3, 2, 40),
-(31, 4, 6, 2, 40),
-(32, 4, 10, 2, 35),
-(33, 4, 1, 2, 30),
-(34, 4, 21, 2, 30),
-(35, 4, 9, 2, 30),
-(36, 4, 4, 2, 20),
-(37, 4, 12, 2, 10);
-
--- --------------------------------------------------------
+LOCK TABLES `detail_konsultasi_penyakit` WRITE;
+/*!40000 ALTER TABLE `detail_konsultasi_penyakit` DISABLE KEYS */;
+INSERT INTO `detail_konsultasi_penyakit` VALUES (38,5,10,1,NULL),(39,5,16,1,NULL),(40,5,13,2,60),(41,5,11,2,60),(42,6,19,1,NULL),(43,6,1,2,70),(44,6,2,2,60),(45,6,3,2,60),(46,6,6,2,50),(47,6,4,2,40),(48,6,12,2,40),(49,6,17,2,30),(50,6,18,2,30),(51,6,19,2,30),(52,6,20,2,30),(53,6,21,2,30),(54,7,1,1,NULL),(55,7,2,1,NULL),(56,7,3,1,NULL),(57,7,4,1,NULL),(58,7,5,1,NULL),(59,7,6,1,NULL),(60,7,7,1,NULL),(61,7,8,1,NULL),(62,7,9,1,NULL),(63,7,11,1,NULL),(64,7,14,1,NULL),(65,7,17,1,NULL),(66,7,1,2,70),(67,7,2,2,60),(68,7,3,2,60),(69,7,11,2,60),(70,7,6,2,50),(71,7,4,2,40),(72,7,12,2,40),(73,7,17,2,30),(74,7,18,2,30),(75,7,19,2,30),(76,7,20,2,30),(77,7,21,2,30);
+/*!40000 ALTER TABLE `detail_konsultasi_penyakit` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `konsultasi`
 --
 
+DROP TABLE IF EXISTS `konsultasi`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `konsultasi` (
-  `id_konsultasi` int(11) NOT NULL,
+  `id_konsultasi` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) DEFAULT NULL,
-  `tanggal_konsultasi` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `tanggal_konsultasi` date DEFAULT NULL,
+  PRIMARY KEY (`id_konsultasi`),
+  KEY `id_user` (`id_user`),
+  CONSTRAINT `konsultasi_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `konsultasi`
 --
 
-INSERT INTO `konsultasi` (`id_konsultasi`, `id_user`, `tanggal_konsultasi`) VALUES
-(1, 1, '2022-10-28'),
-(2, 1, '2022-10-28'),
-(3, 1, '2022-12-20'),
-(4, 13, '2022-12-25');
-
--- --------------------------------------------------------
+LOCK TABLES `konsultasi` WRITE;
+/*!40000 ALTER TABLE `konsultasi` DISABLE KEYS */;
+INSERT INTO `konsultasi` VALUES (1,1,'2022-10-28'),(2,1,'2022-10-28'),(3,1,'2022-12-20'),(4,13,'2022-12-25'),(5,1,'2023-02-20'),(6,1,'2023-02-23'),(7,1,'2023-02-23');
+/*!40000 ALTER TABLE `konsultasi` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `kontak`
 --
 
+DROP TABLE IF EXISTS `kontak`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `kontak` (
-  `id_kontak` int(11) NOT NULL,
+  `id_kontak` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `subject` varchar(65) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `subject` varchar(65) NOT NULL,
+  PRIMARY KEY (`id_kontak`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `kontak`
 --
 
-INSERT INTO `kontak` (`id_kontak`, `nama`, `email`, `subject`) VALUES
-(1, 'sjdfkj', 'sdkljsdj@gmail.com', 'sdksdksd'),
-(2, 'aji', 'aji@gmail.com', 'sdnhsdsdksdj'),
-(3, 'iyos', 'iyos@gmail.com', 'ksskdkdsdsk');
-
--- --------------------------------------------------------
+LOCK TABLES `kontak` WRITE;
+/*!40000 ALTER TABLE `kontak` DISABLE KEYS */;
+INSERT INTO `kontak` VALUES (1,'sjdfkj','sdkljsdj@gmail.com','sdksdksd'),(2,'aji','aji@gmail.com','sdnhsdsdksdj'),(3,'iyos','iyos@gmail.com','ksskdkdsdsk');
+/*!40000 ALTER TABLE `kontak` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ms_gejala`
 --
 
+DROP TABLE IF EXISTS `ms_gejala`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_gejala` (
-  `id_ms_gejala` int(11) NOT NULL,
+  `id_ms_gejala` int(11) NOT NULL AUTO_INCREMENT,
   `id_ms_kategori_gejala` int(11) DEFAULT NULL,
   `kode_gejala` varchar(255) DEFAULT NULL,
-  `nama_gejala` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `nama_gejala` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_ms_gejala`),
+  KEY `id_ms_kategori_gejala` (`id_ms_kategori_gejala`),
+  CONSTRAINT `ms_gejala_ibfk_1` FOREIGN KEY (`id_ms_kategori_gejala`) REFERENCES `ms_kategori_gejala` (`id_ms_kategori_gejala`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_gejala`
 --
 
-INSERT INTO `ms_gejala` (`id_ms_gejala`, `id_ms_kategori_gejala`, `kode_gejala`, `nama_gejala`) VALUES
-(1, 1, 'G01', 'Diam'),
-(2, 1, 'G02', 'Makan'),
-(3, 1, 'G03', 'Tidur'),
-(4, 2, 'G04', 'Merah Bibir'),
-(5, 2, 'G05', 'Pipi Dalam'),
-(6, 2, 'G06', 'Bibir Atas'),
-(7, 2, 'G07', 'Bibir Bawah'),
-(8, 2, 'G08', 'Lidah'),
-(9, 2, 'G09', 'Dasar Mulut'),
-(10, 2, 'G10', 'Gusi'),
-(11, 2, 'G11', 'Sudut Bibir'),
-(12, 3, 'G12', 'Sariawan'),
-(13, 3, 'G13', 'Bercak Merah'),
-(14, 3, 'G14', 'Bercak  Putih'),
-(15, 3, 'G15', 'Bercak Hitam'),
-(16, 3, 'G16', 'Benjolan'),
-(17, 3, 'G17', 'Celah'),
-(18, 3, 'G18', 'Pebgelupasan'),
-(19, 4, 'G19', '<3 Hari'),
-(20, 4, 'G20', '<7 Hari'),
-(21, 4, 'G21', '>7 Hari'),
-(22, 5, 'G22', 'Ya'),
-(23, 5, 'G23', 'Tidak'),
-(24, 6, 'G24', 'Tergigit'),
-(25, 6, 'G25', 'Alergi'),
-(26, 6, 'G26', 'Tumpatan Gigi'),
-(27, 6, 'G27', 'Auto Imun'),
-(28, 6, 'G28', 'Obat'),
-(29, 7, 'G29', 'DM'),
-(30, 7, 'G30', 'Hipertensi'),
-(31, 7, 'G31', 'Kanker'),
-(32, 7, 'G32', 'Asma'),
-(33, 7, 'G33', 'Gangguan Pencernaan'),
-(34, 7, 'G34', 'Gangguan Darah'),
-(35, 8, 'G35', 'Ya'),
-(36, 8, 'G36', 'Tidak'),
-(37, 9, 'G37', 'Ya'),
-(38, 9, 'G38', 'Tidak'),
-(39, 10, 'G39', 'Ya'),
-(40, 10, 'G40', 'Tidak');
-
--- --------------------------------------------------------
+LOCK TABLES `ms_gejala` WRITE;
+/*!40000 ALTER TABLE `ms_gejala` DISABLE KEYS */;
+INSERT INTO `ms_gejala` VALUES (1,1,'G01','Diam'),(2,1,'G02','Makan '),(3,1,'G03','Tidur '),(4,2,'G04','Merah Bibir'),(5,2,'G05','Pipi Dalam '),(6,2,'G06','Bibir Atas'),(7,2,'G07','Bibir Bawah'),(8,2,'G08','Lidah'),(9,2,'G09','Dasar Mulut'),(10,2,'G10','Gusi'),(11,2,'G11','Sudut Bibir'),(12,3,'G12','Sariawan'),(13,3,'G13','Bercak Merah'),(14,3,'G14','Bercak Putih'),(15,3,'G15','Bercak Hitam'),(16,3,'G16','Benjolan'),(17,3,'G17','Celah'),(18,3,'G18','Pengelupasan'),(19,4,'G19','<3 Hari'),(20,4,'G20','<7 Hari'),(21,4,'G21','>7 Hari'),(22,5,'G22','Ya'),(23,5,'G23','Tidak'),(24,6,'G24','Tergigit'),(25,6,'G25','Alergi'),(26,6,'G26','Autoimun'),(27,6,'G27','Obat'),(28,7,'G28','Diabetes Mellitus'),(29,7,'G29','Hipertensi'),(30,7,'G30','Kanker'),(31,7,'G31','Asma'),(32,7,'G32','Gangguan Pencernaan'),(33,7,'G33','Gangguan Darah'),(34,8,'G34','Ya'),(35,8,'G35','Tidak'),(36,9,'G36','Ya'),(37,9,'G37','Tidak '),(38,10,'G38','Ya'),(39,10,'G39','Tidak');
+/*!40000 ALTER TABLE `ms_gejala` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ms_kategori_gejala`
 --
 
+DROP TABLE IF EXISTS `ms_kategori_gejala`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_kategori_gejala` (
-  `id_ms_kategori_gejala` int(11) NOT NULL,
-  `nama_ms_kategori` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `id_ms_kategori_gejala` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_ms_kategori` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_ms_kategori_gejala`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_kategori_gejala`
 --
 
-INSERT INTO `ms_kategori_gejala` (`id_ms_kategori_gejala`, `nama_ms_kategori`) VALUES
-(1, 'Nyeri'),
-(2, 'Lokasi'),
-(3, 'Bentuk Kelainan'),
-(4, 'Muncul Kapan'),
-(5, 'Kambuhan'),
-(6, 'Diketahui Penyebabnya'),
-(7, 'Riwayat Kesehatan'),
-(8, 'Pembengkakan'),
-(9, 'Apakah Pernah Berdarah'),
-(10, 'Apakah Ada Bercak Atau Kondisi Yang Sama Ditemukan Di Kulit '),
-(11, 'Apakah Pernah Diobati');
-
--- --------------------------------------------------------
+LOCK TABLES `ms_kategori_gejala` WRITE;
+/*!40000 ALTER TABLE `ms_kategori_gejala` DISABLE KEYS */;
+INSERT INTO `ms_kategori_gejala` VALUES (1,'Nyeri'),(2,'Lokasi'),(3,'Bentuk Kelainan'),(4,'Muncul Kapan'),(5,'Kambuhan'),(6,'Diketahui Penyebabnya'),(7,'Riwayat Kesehatan'),(8,'Pembengkakan'),(9,'Apakah Pernah Berdarah'),(10,'Apakah Ada Bercak Atau Kondisi Yang Sama Ditemukan Di Kulit '),(11,'Apakah Pernah Diobati');
+/*!40000 ALTER TABLE `ms_kategori_gejala` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ms_penyakit`
 --
 
+DROP TABLE IF EXISTS `ms_penyakit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_penyakit` (
-  `id_ms_penyakit` int(11) NOT NULL,
+  `id_ms_penyakit` int(11) NOT NULL AUTO_INCREMENT,
   `kode_penyakit` varchar(255) DEFAULT NULL,
   `nama_penyakit` varchar(255) DEFAULT NULL,
-  `solusi_penyakit` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `solusi_penyakit` text DEFAULT NULL,
+  PRIMARY KEY (`id_ms_penyakit`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `ms_penyakit`
 --
 
-INSERT INTO `ms_penyakit` (`id_ms_penyakit`, `kode_penyakit`, `nama_penyakit`, `solusi_penyakit`) VALUES
-(1, 'P01', 'RAS MAYOR', 'Dapat Mengoleskan Salep Kortikosteroid Topikal Triamcinolone Acetonide 0,1%, Obat Kumur Antiseptik Atau Air Garam, Menambah Asupan Nutrisi (buah Dan Sayur), Manajemen Stres (jika Perlu Dapat Berkonsultasi Ke Psikolog/psikiater), Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi'),
-(2, 'P02', 'RAS Minor', 'Dapat Mengoleskan Salep Kortikosteroid Topikal Triamcinolone Acetonide 0,1%, Obat Kumur Antiseptik Atau Air Garam, Menambah Asupan Nutrisi (buah Dan Sayur), Manajemen Stres (jika Perlu Dapat Berkonsultasi Ke Psikolog/psikiater), Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi'),
-(3, 'P03', 'RAS Herpetiformis', 'Dapat Mengoleskan Salep Kortikosteroid Topikal Triamcinolone Acetonide 0,1%, Obat Kumur Antiseptik Atau Air Garam, Menambah Asupan Nutrisi (buah Dan Sayur), Manajemen Stres (jika Perlu Dapat Berkonsultasi Ke Psikolog/psikiater), Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi'),
-(4, 'P04', 'Kandidiasis', 'Konsumsi Obat Antijamur Seperti Nystatine, Ketoconazole, Miconazole, Atau Lainnya (harus Dengan Resep Dokter Gigi), Obat Kumur Antiseptik Atau Air Garam, Hindari Merokok, Kontrol Rutin Ke Dokter Jika Memiliki Riwayat Penyakit Lain, Tetap Rutin Gosok Gigi Dan Lidah Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi Atau Dokter Gigi Spesialis Penyakit Mulut'),
-(5, 'P05', 'Parotitis', 'Konsumsi Obat Penurun Demam Seperti Paracetamol Atau Ibuprofen, Konsumsi Air Putih Yang Banyak Untuk Menghindari Dehidrasi Akibat Demam, Istirahat Yang Cukup, Makan Makanan Yang Lembut (bubur), Menambah Asupan Nutrisi (buah Dan Sayur), Kompres Pipi Dengan Air Hangat/air Dingin, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi'),
-(6, 'P06', 'Ulser Traumatikus', '<p>Dapat Mengoleskan Salep Kortikosteroid Topikal Triamcinolone Acetonide 0,1%, Kumur Dengan Obat Kumur Antiseptik Atau Air Garam, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur), Dan Kontrol Ke Dokter Gigi Spesialis Ortodonsia Untuk Memperbaiki Behel, Atau Ke Dokter Gigi Atau Dokter Gigi Spesialis Penyakit Mulut Untuk Mengetahui Penyebab Lainnya</p>\r\n'),
-(7, 'P07', 'Angular Cheilitis', 'Dapat Mengoleskan Salep Kortikosteroid Topikal Triamcinolone Acetonide 0,1%, Obat Antijamur (harus Dengan Resep Dokter Gigi), Menambah Asupan Nutrisi (buah Dan Sayur), Memperbaiki Gigi Palsu (apabila Penyakitnya Terjadi Akibat Pemakaian Gigi Palsu), Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi'),
-(8, 'P08', 'Exfoliative Cheilitis', 'Dapat Mengoleskan Salep Kortikosteroid Topikal Triamcinolone Acetonide 0,1%, Obat Antijamur (harus Dengan Resep Dokter Gigi), Menambah Asupan Nutrisi (buah Dan Sayur), Hindari Menghisap/menjilati Bibir, Manajemen Stres (jika Perlu Dapat Berkonsultasi Ke Psikolog/psikiater), Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi'),
-(9, 'P09', 'Actinic Cheilitis', 'Dapat Mengoleskan Salep Kortikosteroid Topikal Triamcinolone Acetonide 0,1%, Pelembab Bibir Atau Tabir Surya Yang Mengandung SPF, Hindari Merokok, Hindari Menghisap Bibir, Hindari Kontak Langsung Dengan Matahari (masker Wajah, Payung, Dll), Menambah Asupan Nutrisi (buah Dan Sayur), Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi'),
-(10, 'P10', 'Linea Alba Buccalis', 'Tidak Memerlukan Perawatan Karena Merupakan Kondisi Yang Normal Dan Tidak Berbahaya, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi'),
-(12, 'P11', 'Geographic Tongue', 'Tidak Memerlukan Perawatan Karena Merupakan Kondisi Yang Normal Dan Tidak Berbahaya, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi'),
-(13, 'P12', 'Fordyce’s Granules', 'Tidak Memerlukan Perawatan Karena Merupakan Kondisi Yang Normal Dan Tidak Berbahaya, Jika Kondisi Tersebut Mengganggu Penampilan Maka Dapat Dilakukan Perawatan Laser Ablasi CO2, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi'),
-(14, 'P13', 'Kanker Mulut (Kanker Sel Skuamosa)', 'Dugaan Keganasan/kanker Mulut, Segera Ke Dokter Gigi, Dokter Gigi Spesialis Penyakit Mulut, Atau Dokter Gigi Spesialis Bedah Mulut Dan Maksilofasial Untuk Pemeriksaan Lebih Lanjut. Perawatan Dapat Dilakukan Dengan Operasi Untuk Pengangkatan Sel Kanker, Terapi Radiasi, Kemoterapi, Kombinasi Operasi Dan Radiasi. Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi'),
-(15, 'P14', 'Median Rhomboid Glossitis', 'Tidak Memerlukan Perawatan Karena Merupakan Kondisi Yang Normal Dan Tidak Berbahaya, Jika Memakai Gigi Palsu Maka Harus Rutin Membersihkan Gigi Palsunya, Hindari Merokok, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi\n \n'),
-(16, 'P15', 'Amalgam Tatto', 'Tidak Memerlukan Perawatan Karena Merupakan Kondisi Yang Normal Dan Tidak Berbahaya, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi'),
-(17, 'P16', 'Herpes Labialis ', 'Konsumsi Obat Pereda Nyeri Dan Demam Seperti Paracetamol, Asam Mefenamat Atau Ibuprofen Dan Obat Antivirus Seperti Acyclovir, Valacyclovir, Atau Famciclovir(harus Dengan Resep Dokter), Konsumsi Air Putih Yang Banyak, Istirahat Yang Cukup, Makan Makanan Yang Lembut (bubur), Makan Makanan Tinggi Kalori Dan Tinggi Protein (diet TKTP), Menginformasikan Bahwa Ini Merupakan Penyakit Yang Menular Sehingga Diharapkan Isolasi Atau Tidak Kontak Dengan Orang Lain, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Periksakan Lebih Lanjut Ke Dokter Gigi, Dokter Gigi Spesialis Penyakit Mulut Atau Dokter Gigi Spesialis Kulit Dan Kelamin'),
-(18, 'P17', 'Herpes Zoster ', 'Konsumsi Obat Pereda Nyeri Dan Demam Seperti Paracetamol, Asam Mefenamat Atau Ibuprofen Dan Obat Antivirus Seperti Acyclovir, Valacyclovir, Atau Famciclovir(harus Dengan Resep Dokter), Konsumsi Air Putih Yang Banyak, Istirahat Yang Cukup, Makan Makanan Yang Lembut (bubur), Makan Makanan Tinggi Kalori Dan Tinggi Protein (diet TKTP), Menginformasikan Bahwa Ini Merupakan Penyakit Yang Menular Sehingga Diharapkan Isolasi Atau Tidak Kontak Dengan Orang Lain, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Periksakan Lebih Lanjut Ke Dokter Gigi, Dokter Gigi Spesialis Penyakit Mulut Atau Dokter Gigi Spesialis Kulit Dan Kelamin'),
-(19, 'P18', 'Fisured Tongue', 'Tidak Memerlukan Perawatan Karena Merupakan Kondisi Yang Normal Dan Tidak Berbahaya, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur), Rutin Membersihkan Lidah Dari Sisa-sisa Makanan Yang Mungkin Menyelip Di Antara Sela-sela Lidah Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi'),
-(20, 'P19', 'Coated Tongue', '<p>PENYAKIT NEW</p>\r\n'),
-(21, 'P20', 'Torus Mandibularis', 'Tidak Memerlukan Perawatan Karena Merupakan Kondisi Yang Normal Dan Tidak Berbahaya, Namun Jika Ingin Membuat/menggunakan Gigi Palsu Maka Harus Dilakukan Tindakan Operasi Pengangkatan Benjolan Tulang Tersebut. Selain Itu Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi'),
-(22, 'P21', 'Torus Palatinus', 'Tidak Memerlukan Perawatan Karena Merupakan Kondisi Yang Normal Dan Tidak Berbahaya, Namun Jika Ingin Membuat/menggunakan Gigi Palsu Maka Harus Dilakukan Tindakan Operasi Pengangkatan Benjolan Tulang Tersebut. Selain Itu Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi');
-
--- --------------------------------------------------------
+LOCK TABLES `ms_penyakit` WRITE;
+/*!40000 ALTER TABLE `ms_penyakit` DISABLE KEYS */;
+INSERT INTO `ms_penyakit` VALUES (1,'P01','RAS Mayor','Dapat Menggunakan Obat Kumur Antiseptik Atau Air Garam, Menambah Asupan Nutrisi (buah Dan Sayur), Manajemen Stres (jika Perlu Dapat Berkonsultasi Ke Psikolog/psikiater), Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi.'),(2,'P02','RAS Minor','Dapat Menggunakan Obat Kumur Antiseptik Atau Air Garam, Menambah Asupan Nutrisi (buah Dan Sayur), Manajemen Stress (jika Perlu Dapat Berkonsultasi Ke Psikolog/psikiater), Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi.'),(3,'P03','RAS Herpetiformis','Dapat Menggunakan Obat Kumur Antiseptik Atau Air Garam, Menambah Asupan Nutrisi (buah Dan Sayur), Manajemen Stres (jika Perlu Dapat Berkonsultasi Ke Psikolog/psikiater), Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi.'),(4,'P04','Kandidiasis','Dapat Menggunakan Obat Kumur Antiseptik Atau Air Garam, Hindari Merokok, Kontrol Rutin Ke Dokter Jika Memiliki Riwayat Penyakit Lain, Tetap Rutin Gosok Gigi Dan Lidah Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi Atau Dokter Gigi Spesialis Penyakit Mulut.'),(5,'P05','Parotitis','Sering Mengkonsumsi Air Putih Yang Banyak Untuk Menghindari Dehidrasi Akibat Demam, Istirahat Yang Cukup, Makan Makanan Yang Lembut (bubur), Menambah Asupan Nutrisi (buah Dan Sayur), Kompres Pipi Dengan Air Hangat/air Dingin, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi.'),(6,'P06','Ulser Traumatitis','Dapat Mengoleskan Salep Kortikosteroid Topikal Triamcinolone Acetonide 0,1%, Kumur Dengan Obat Kumur Antiseptik Atau Air Garam, Tetap Rutin Gosok Gigi.'),(7,'P07','Angular Cheilitis','Rutin Mengkonsumsi Asupan Nutrisi (buah Dan Sayur), Memperbaiki Gigi Palsu (apabila Penyakitnya Terjadi Akibat Pemakaian Gigi Palsu), Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi.'),(8,'P08','Exfoliative Cheilitis','Rutin Menambah Asupan Nutrisi (buah Dan Sayur), Hindari Menghisap/menjilati Bibir, Manajemen Stres (jika Perlu Dapat Berkonsultasi Ke Psikolog/psikiater), Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi.'),(9,'P09','Actinic Cheilitis','Menggunakan Pelembab Bibir Atau Tabir Surya Yang Mengandung SPF, Hindari Merokok, Hindari Menghisap Bibir, Hindari Kontak Langsung Dengan Matahari (masker Wajah, Payung, Dll) Menambah Asupan Nutrisi (buah Dan Sayur), Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi.'),(10,'P10','Linea Alba Buccalis','Tidak Memerlukan Perawatan Karena Merupakan Kondisi Yang Normal Dan Tidak Berbahaya, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi.'),(11,'P11','Nicotinic Stomatitis','Berhenti Merokok Dengan Cara Manajemen Stres (bila Merokok Adalah Pelarian Dari Stres), Konsultasi Ke Psikolog Atau Psikiater Untuk Melakukan Psikoterapi Dalam Program Penghentian Merokok Atau Terapi Stres, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi.'),(12,'P12','Geographic Tongue','Tidak Memerlukan Perawatan Karena Merupakan Kondisi Yang Normal Dan Tidak Berbahaya, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi.'),(13,'P13','Fordyce\'s Granules','Tidak Memerlukan Perawatan Karena Merupakan Kondisi Yang Normal Dan Tidak Berbahaya, Jika Kondisi Tersebut Mengganggu Penampilan Maka Dapat Dilakukan Perawatan Laser Ablasi CO2, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi. '),(14,'P14','Kanker Mulut','Dugaan Keganasan / Kanker Mulut, Segera Ke Dokter Gigi, Dokter Gigi Spesialis Penyakit Mulut, Atau Dokter Gigi Spesialis Bedah Mulut Dan Maksilofasial Untuk Pemeriksaan Lebih Lanjut. Perawatan Dapat Dilakukan Dengan Operasi Untuk Pengangkatan Sel Kanker, Terapi Radiasi, Kemoterapi, Kombinasi Operasi Dan Radiasi. Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi.'),(15,'P15','Median Rhomboid Glossitis','Tidak Memerlukan Perawatan Karena Merupakan Kondisi Yang Normal Dan Tidak Berbahaya, Jika Memakai Gigi Palsu Maka Harus Rutin Membersihkan Gigi Palsunya, Hindari Merokok, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi.'),(16,'P16','Pigmentasi','Tidak Memerlukan Perawatan Karena Merupakan Kondisi Yang Normal Dan Tidak Berbahaya, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi.'),(17,'P17','Herpes Labialis','Konsumsi Air Putih Yang Banyak, Istirahat Yang Cukup, Makan Makanan Yang Lembut (bubur), Makan Makanan Tinggi Kalori Dan Tinggi Protein (diet TKTP), Menginformasikan Bahwa Ini Merupakan Penyakit Yang Menular Sehingga Diharapkan Isolasi Atau Tidak Kontak Dengan Orang Lain, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Periksakan Lebih Lanjut Ke Dokter Gigi, Dokter Gigi Spesialis Penyakit Mulut Atau Dokter Gigi Spesialis Kulit Dan Kelamin.'),(18,'P18','Coated Tongue','Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur), Rutin Membersihkan Lidah Dari Sisa-sisa Makanan Yang Mungkin Menyelip Diantara Sela-sela Lidah, Konsumsi Air Putih Delapan Gelas Per Hari, Makan Makanan Berserat  Seperti Sayur Dan Bervitamin, Mengurangi Konsumsi Rokok Maupun Kopi Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi.'),(19,'P19','Fisured Tongue','Tidak Memerlukan Perawatan Karena Merupakan Kondisi Yang Normal Dan Tidak Berbahaya, Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur), Rutin Membersihkan Lidah Dari Sisa-sisa Makanan Yang Mungkin Menyelip Di Antara Sela-sela Lidah Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi.'),(20,'P20','Torus Mandibularis','Tidak Memerlukan Perawatan Karena Merupakan Kondisi Yang Normal Dan Tidak Berbahaya, Namun Jika Ingin Membuat/menggunakan Gigi Palsu Maka Harus Dilakukan Tindakan Operasi Pengangkatan Benjolan Tulang Tersebut. Selain Itu Tetap Rutin Gosok Gigi Dua Kali Sehari (sesudah Sarapan Dan Sebelum Tidur) Serta Kontrol Rutin 6 Bulan Sekali Ke Dokter Gigi.'),(21,'P21','Torus Palatinus','Tidak Memerlukan Perawatan Karena Merupakan Kondisi Yang Normal Dan Tidak Berbahaya, Namun Jika Ingin Membuat/menggunakan Gigi Palsu Maka Harus Dilakukan Tindakan Operasi Pengangkatan Benjolan Tulang Tersebut. Selain Itu Tetap Rutin Gosok Gigi Dua Kali Sehari.');
+/*!40000 ALTER TABLE `ms_penyakit` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `register`
 --
 
+DROP TABLE IF EXISTS `register`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `register` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) DEFAULT NULL,
   `nama` varchar(255) DEFAULT NULL,
   `alamat` text DEFAULT NULL,
@@ -629,697 +254,178 @@ CREATE TABLE `register` (
   `tanggal_lahir` date DEFAULT NULL,
   `jenis_kelamin` char(1) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_user` (`id_user`),
+  CONSTRAINT `register_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `register`
 --
 
-INSERT INTO `register` (`id`, `id_user`, `nama`, `alamat`, `no_tlp`, `tanggal_lahir`, `jenis_kelamin`, `created_at`, `updated_at`) VALUES
-(11, 13, 'Nugget', 'Jagiran Lor', '0989289484', '2022-12-25', 'L', '2022-12-25 03:50:46', '2022-12-25 03:50:46'),
-(12, 14, 'Yoga', 'Jakarta', '08474774', '2022-12-14', 'L', '2022-12-25 05:27:05', '2022-12-25 05:27:05'),
-(13, 15, 'Yahya', 'jagiran', '08976533', '2008-01-30', 'L', '2022-12-25 05:27:58', '2022-12-25 05:27:58');
-
--- --------------------------------------------------------
+LOCK TABLES `register` WRITE;
+/*!40000 ALTER TABLE `register` DISABLE KEYS */;
+INSERT INTO `register` VALUES (11,13,'Nugget','Jagiran Lor','0989289484','2022-12-25','L','2022-12-25 03:50:46','2022-12-25 03:50:46'),(12,14,'Yoga','Jakarta','08474774','2022-12-14','L','2022-12-25 05:27:05','2022-12-25 05:27:05'),(13,15,'Yahya','jagiran','08976533','2008-01-30','L','2022-12-25 05:27:58','2022-12-25 05:27:58');
+/*!40000 ALTER TABLE `register` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `role`
 --
 
+DROP TABLE IF EXISTS `role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `role` (
-  `id` int(11) NOT NULL,
-  `nama_role` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_role` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `role`
 --
 
-INSERT INTO `role` (`id`, `nama_role`) VALUES
-(1, 'Super Admin'),
-(2, 'User');
-
--- --------------------------------------------------------
+LOCK TABLES `role` WRITE;
+/*!40000 ALTER TABLE `role` DISABLE KEYS */;
+INSERT INTO `role` VALUES (1,'Super Admin'),(2,'User');
+/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `rule`
 --
 
+DROP TABLE IF EXISTS `rule`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `rule` (
-  `id_rule` int(11) NOT NULL,
+  `id_rule` int(11) NOT NULL AUTO_INCREMENT,
   `id_ms_penyakit` int(11) DEFAULT NULL,
-  `gejala` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `gejala` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_rule`),
+  KEY `id_ms_penyakit` (`id_ms_penyakit`),
+  CONSTRAINT `rule_ibfk_1` FOREIGN KEY (`id_ms_penyakit`) REFERENCES `ms_penyakit` (`id_ms_penyakit`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `rule`
 --
 
-INSERT INTO `rule` (`id_rule`, `id_ms_penyakit`, `gejala`) VALUES
-(1, 2, '1,2,3,5,6,7,8,9,10,12,19,20,22,24,28,29,34,36,38,40'),
-(2, 1, '1,2,3,5,6,7,8,9,10,12,19,20,21,22,24,25,27,28,29,33,34,35,38,40'),
-(3, 3, '1,2,3,5,6,7,8,9,10,12,19,20,22,24,25,27,28,29,33,34,36,38,39,40'),
-(4, 4, '1,2,3,5,6,7,8,9,10,11,12,13,14,18,20,21,22,27,28,29,30,31,33,34,36,37,40'),
-(5, 5, '2,5,16,19,20,23,35,38,39'),
-(6, 6, '1,2,3,5,6,7,8,9,10,11,12,19,20,23,24,35,38'),
-(7, 7, '1,2,11,12,15,18,21,22,23,25,28,29,36,40'),
-(8, 8, '1,2,4,11,18,21,22,25,28,29,34,36,37,40'),
-(9, 9, '1,2,3,4,12,13,18,21,22,25,31,35,37,40'),
-(10, 10, '5,14,21,23,24'),
-(11, 12, '2,8,13,14,20,22,27,28,29,33,34,36,38,40'),
-(12, 13, '4,5,14,21,23'),
-(13, 14, '1,2,3,4,5,6,7,8,9,10,12,13,14,16,18,21,22,24,29,31,35,37,40'),
-(14, 15, '2,8,13,21,23,28,29,34,36,38,40'),
-(15, 16, '5,10,15,21,23,26,36,38,40'),
-(16, 17, '1,2,3,4,6,7,11,12,16,20,22,36,38,40'),
-(17, 18, '1,4,5,6,7,8,9,10,11,12,21,22,26,29,36,38,39'),
-(18, 19, '8,17,21,22,36,38,40'),
-(19, 20, '2,8,14,21,22,28,29,33,34,36,38,40'),
-(20, 21, '10,16,21,23,35,37,40'),
-(21, 22, '10,16,21,23,35,37,40');
-
--- --------------------------------------------------------
+LOCK TABLES `rule` WRITE;
+/*!40000 ALTER TABLE `rule` DISABLE KEYS */;
+INSERT INTO `rule` VALUES (23,1,'1,2,3,5,6,7,8,9,10,12,19,20,21,22,24,25,26,27,28,32,33,34,37,39'),(24,2,'1,2,3,5,6,7,8,9,10,12,19,20,22,24,25,27,28,33,35,37,39'),(25,3,'1,2,3,5,6,7,8,9,10,12,19,20,22,24,25,26,27,28,32,33,35,37,38,39'),(26,4,'1,2,3,5,6,7,8,9,10,11,12,13,14,16,20,21,22,26,27,28,29,30,32,33,35,36,39'),(27,5,'1,2,5,16,19,20,22,34,37,38'),(28,6,'1,2,3,5,6,7,8,9,10,11,12,19,20,22,24,31,34,37'),(29,7,'1,2,4,11,12,13,14,18,21,22,25,27,28,33,35,39'),(30,8,'1,2,4,11,18,21,22,25,26,27,28,33,35,36,39'),(31,9,'1,2,3,4,12,13,18,21,22,24,25,30,34,36,39'),(32,10,'5,14,21,23,24'),(33,11,'1,2,10,12,13,21'),(34,12,'2,8,13,14,20,22,26,27,28,32,33,35,37,39'),(35,13,'4,5,6,7,14,21,23'),(36,14,'1,2,3,4,5,6,7,8,9,10,12,13,14,16,21,22,24,28,30,34,35,36,38,39'),(37,15,'2,8,13,21,23,27,28,33,35,37,39'),(38,16,'5,6,15'),(39,17,'1,2,3,4,11,12,16,20,22,35,37,39'),(40,18,'2,8,14,21,22,27,28,32,33,35,37,39'),(41,19,'8,17,21,22,35,37,39'),(42,20,'10,16,21,22,34,36,39'),(43,21,'10,16,21,22,34,36,39');
+/*!40000 ALTER TABLE `rule` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `rule_breadth`
 --
 
+DROP TABLE IF EXISTS `rule_breadth`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `rule_breadth` (
-  `id_rule_breadth` int(11) NOT NULL,
+  `id_rule_breadth` int(11) NOT NULL AUTO_INCREMENT,
   `id_rule` int(11) DEFAULT NULL,
   `parent_ms_gejala` int(11) DEFAULT NULL,
   `child_ms_gejala` int(11) DEFAULT NULL,
-  `id_ms_penyakit` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_ms_penyakit` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_rule_breadth`),
+  KEY `rule_breadth_ibfk_1` (`id_rule`),
+  KEY `rule_breadth_ibfk_2` (`parent_ms_gejala`),
+  KEY `rule_breadth_ibfk_3` (`child_ms_gejala`),
+  KEY `rule_breadth_ibfk_4` (`id_ms_penyakit`),
+  CONSTRAINT `rule_breadth_ibfk_1` FOREIGN KEY (`id_rule`) REFERENCES `rule` (`id_rule`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `rule_breadth_ibfk_2` FOREIGN KEY (`parent_ms_gejala`) REFERENCES `ms_gejala` (`id_ms_gejala`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `rule_breadth_ibfk_3` FOREIGN KEY (`child_ms_gejala`) REFERENCES `ms_gejala` (`id_ms_gejala`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `rule_breadth_ibfk_4` FOREIGN KEY (`id_ms_penyakit`) REFERENCES `ms_penyakit` (`id_ms_penyakit`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=603 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `rule_breadth`
 --
 
-INSERT INTO `rule_breadth` (`id_rule_breadth`, `id_rule`, `parent_ms_gejala`, `child_ms_gejala`, `id_ms_penyakit`) VALUES
-(21, 1, 1, 2, NULL),
-(22, 1, 2, 3, NULL),
-(23, 1, 3, 5, NULL),
-(24, 1, 5, 6, NULL),
-(25, 1, 6, 7, NULL),
-(26, 1, 7, 8, NULL),
-(27, 1, 8, 9, NULL),
-(28, 1, 9, 10, NULL),
-(29, 1, 10, 12, NULL),
-(30, 1, 12, 19, NULL),
-(31, 1, 19, 20, NULL),
-(32, 1, 20, 22, NULL),
-(33, 1, 22, 24, NULL),
-(34, 1, 24, 28, NULL),
-(35, 1, 28, 29, NULL),
-(36, 1, 29, 34, NULL),
-(37, 1, 34, 36, NULL),
-(38, 1, 36, 38, NULL),
-(39, 1, 38, 40, NULL),
-(40, 1, 40, NULL, 2),
-(41, 2, 1, 2, NULL),
-(42, 2, 2, 3, NULL),
-(43, 2, 3, 5, NULL),
-(44, 2, 5, 6, NULL),
-(45, 2, 6, 7, NULL),
-(46, 2, 7, 8, NULL),
-(47, 2, 8, 9, NULL),
-(48, 2, 9, 10, NULL),
-(49, 2, 10, 12, NULL),
-(50, 2, 12, 19, NULL),
-(51, 2, 19, 20, NULL),
-(52, 2, 20, 21, NULL),
-(53, 2, 21, 22, NULL),
-(54, 2, 22, 24, NULL),
-(55, 2, 24, 25, NULL),
-(56, 2, 25, 27, NULL),
-(57, 2, 27, 28, NULL),
-(58, 2, 28, 29, NULL),
-(59, 2, 29, 33, NULL),
-(60, 2, 33, 34, NULL),
-(61, 2, 34, 35, NULL),
-(62, 2, 35, 38, NULL),
-(63, 2, 38, 40, NULL),
-(64, 2, 40, NULL, 1),
-(65, 3, 1, 2, NULL),
-(66, 3, 2, 3, NULL),
-(67, 3, 3, 5, NULL),
-(68, 3, 5, 6, NULL),
-(69, 3, 6, 7, NULL),
-(70, 3, 7, 8, NULL),
-(71, 3, 8, 9, NULL),
-(72, 3, 9, 10, NULL),
-(73, 3, 10, 12, NULL),
-(74, 3, 12, 19, NULL),
-(75, 3, 19, 20, NULL),
-(76, 3, 20, 22, NULL),
-(77, 3, 22, 24, NULL),
-(78, 3, 24, 25, NULL),
-(79, 3, 25, 27, NULL),
-(80, 3, 27, 28, NULL),
-(81, 3, 28, 29, NULL),
-(82, 3, 29, 33, NULL),
-(83, 3, 33, 34, NULL),
-(84, 3, 34, 36, NULL),
-(85, 3, 36, 38, NULL),
-(86, 3, 38, 39, NULL),
-(87, 3, 39, 40, NULL),
-(88, 3, 40, NULL, 3),
-(89, 4, 1, 2, NULL),
-(90, 4, 2, 3, NULL),
-(91, 4, 3, 5, NULL),
-(92, 4, 5, 6, NULL),
-(93, 4, 6, 7, NULL),
-(94, 4, 7, 8, NULL),
-(95, 4, 8, 9, NULL),
-(96, 4, 9, 10, NULL),
-(97, 4, 10, 11, NULL),
-(98, 4, 11, 12, NULL),
-(99, 4, 12, 13, NULL),
-(100, 4, 13, 14, NULL),
-(101, 4, 14, 18, NULL),
-(102, 4, 18, 20, NULL),
-(103, 4, 20, 21, NULL),
-(104, 4, 21, 22, NULL),
-(105, 4, 22, 27, NULL),
-(106, 4, 27, 28, NULL),
-(107, 4, 28, 29, NULL),
-(108, 4, 29, 30, NULL),
-(109, 4, 30, 31, NULL),
-(110, 4, 31, 33, NULL),
-(111, 4, 33, 34, NULL),
-(112, 4, 34, 36, NULL),
-(113, 4, 36, 37, NULL),
-(114, 4, 37, 40, NULL),
-(115, 4, 40, NULL, 4),
-(116, 5, 2, 5, NULL),
-(117, 5, 5, 16, NULL),
-(118, 5, 16, 19, NULL),
-(119, 5, 19, 20, NULL),
-(120, 5, 20, 23, NULL),
-(121, 5, 23, 35, NULL),
-(122, 5, 35, 38, NULL),
-(123, 5, 38, 39, NULL),
-(124, 5, 39, NULL, 5),
-(125, 6, 1, 2, NULL),
-(126, 6, 2, 3, NULL),
-(127, 6, 3, 5, NULL),
-(128, 6, 5, 6, NULL),
-(129, 6, 6, 7, NULL),
-(130, 6, 7, 8, NULL),
-(131, 6, 8, 9, NULL),
-(132, 6, 9, 10, NULL),
-(133, 6, 10, 11, NULL),
-(134, 6, 11, 12, NULL),
-(135, 6, 12, 19, NULL),
-(136, 6, 19, 20, NULL),
-(137, 6, 20, 23, NULL),
-(138, 6, 23, 24, NULL),
-(139, 6, 24, 35, NULL),
-(140, 6, 35, 38, NULL),
-(141, 6, 38, NULL, 6),
-(142, 7, 1, 2, NULL),
-(143, 7, 2, 11, NULL),
-(144, 7, 11, 12, NULL),
-(145, 7, 12, 15, NULL),
-(146, 7, 15, 18, NULL),
-(147, 7, 18, 21, NULL),
-(148, 7, 21, 22, NULL),
-(149, 7, 22, 23, NULL),
-(150, 7, 23, 25, NULL),
-(151, 7, 25, 28, NULL),
-(152, 7, 28, 29, NULL),
-(153, 7, 29, 36, NULL),
-(154, 7, 36, 40, NULL),
-(155, 7, 40, NULL, 7),
-(156, 8, 1, 2, NULL),
-(157, 8, 2, 4, NULL),
-(158, 8, 4, 11, NULL),
-(159, 8, 11, 18, NULL),
-(160, 8, 18, 21, NULL),
-(161, 8, 21, 22, NULL),
-(162, 8, 22, 25, NULL),
-(163, 8, 25, 28, NULL),
-(164, 8, 28, 29, NULL),
-(165, 8, 29, 34, NULL),
-(166, 8, 34, 36, NULL),
-(167, 8, 36, 37, NULL),
-(168, 8, 37, 40, NULL),
-(169, 8, 40, NULL, 8),
-(170, 9, 1, 2, NULL),
-(171, 9, 2, 3, NULL),
-(172, 9, 3, 4, NULL),
-(173, 9, 4, 12, NULL),
-(174, 9, 12, 13, NULL),
-(175, 9, 13, 18, NULL),
-(176, 9, 18, 21, NULL),
-(177, 9, 21, 22, NULL),
-(178, 9, 22, 25, NULL),
-(179, 9, 25, 31, NULL),
-(180, 9, 31, 35, NULL),
-(181, 9, 35, 37, NULL),
-(182, 9, 37, 40, NULL),
-(183, 9, 40, NULL, 9),
-(184, 10, 5, 14, NULL),
-(185, 10, 14, 21, NULL),
-(186, 10, 21, 23, NULL),
-(187, 10, 23, 24, NULL),
-(188, 10, 24, NULL, 10),
-(189, 11, 2, 8, NULL),
-(190, 11, 8, 13, NULL),
-(191, 11, 13, 14, NULL),
-(192, 11, 14, 20, NULL),
-(193, 11, 20, 22, NULL),
-(194, 11, 22, 27, NULL),
-(195, 11, 27, 28, NULL),
-(196, 11, 28, 29, NULL),
-(197, 11, 29, 33, NULL),
-(198, 11, 33, 34, NULL),
-(199, 11, 34, 36, NULL),
-(200, 11, 36, 38, NULL),
-(201, 11, 38, 40, NULL),
-(202, 11, 40, NULL, 12),
-(203, 12, 4, 5, NULL),
-(204, 12, 5, 14, NULL),
-(205, 12, 14, 21, NULL),
-(206, 12, 21, 23, NULL),
-(207, 12, 23, NULL, 13),
-(208, 13, 1, 2, NULL),
-(209, 13, 2, 3, NULL),
-(210, 13, 3, 4, NULL),
-(211, 13, 4, 5, NULL),
-(212, 13, 5, 6, NULL),
-(213, 13, 6, 7, NULL),
-(214, 13, 7, 8, NULL),
-(215, 13, 8, 9, NULL),
-(216, 13, 9, 10, NULL),
-(217, 13, 10, 12, NULL),
-(218, 13, 12, 13, NULL),
-(219, 13, 13, 14, NULL),
-(220, 13, 14, 16, NULL),
-(221, 13, 16, 18, NULL),
-(222, 13, 18, 21, NULL),
-(223, 13, 21, 22, NULL),
-(224, 13, 22, 24, NULL),
-(225, 13, 24, 29, NULL),
-(226, 13, 29, 31, NULL),
-(227, 13, 31, 35, NULL),
-(228, 13, 35, 37, NULL),
-(229, 13, 37, 40, NULL),
-(230, 13, 40, NULL, 14),
-(231, 14, 2, 8, NULL),
-(232, 14, 8, 13, NULL),
-(233, 14, 13, 21, NULL),
-(234, 14, 21, 23, NULL),
-(235, 14, 23, 28, NULL),
-(236, 14, 28, 29, NULL),
-(237, 14, 29, 34, NULL),
-(238, 14, 34, 36, NULL),
-(239, 14, 36, 38, NULL),
-(240, 14, 38, 40, NULL),
-(241, 14, 40, NULL, 15),
-(242, 15, 5, 10, NULL),
-(243, 15, 10, 15, NULL),
-(244, 15, 15, 21, NULL),
-(245, 15, 21, 23, NULL),
-(246, 15, 23, 26, NULL),
-(247, 15, 26, 36, NULL),
-(248, 15, 36, 38, NULL),
-(249, 15, 38, 40, NULL),
-(250, 15, 40, NULL, 16),
-(251, 16, 1, 2, NULL),
-(252, 16, 2, 3, NULL),
-(253, 16, 3, 4, NULL),
-(254, 16, 4, 6, NULL),
-(255, 16, 6, 7, NULL),
-(256, 16, 7, 11, NULL),
-(257, 16, 11, 12, NULL),
-(258, 16, 12, 16, NULL),
-(259, 16, 16, 20, NULL),
-(260, 16, 20, 22, NULL),
-(261, 16, 22, 36, NULL),
-(262, 16, 36, 38, NULL),
-(263, 16, 38, 40, NULL),
-(264, 16, 40, NULL, 17),
-(265, 17, 1, 4, NULL),
-(266, 17, 4, 5, NULL),
-(267, 17, 5, 6, NULL),
-(268, 17, 6, 7, NULL),
-(269, 17, 7, 8, NULL),
-(270, 17, 8, 9, NULL),
-(271, 17, 9, 10, NULL),
-(272, 17, 10, 11, NULL),
-(273, 17, 11, 12, NULL),
-(274, 17, 12, 21, NULL),
-(275, 17, 21, 22, NULL),
-(276, 17, 22, 26, NULL),
-(277, 17, 26, 29, NULL),
-(278, 17, 29, 36, NULL),
-(279, 17, 36, 38, NULL),
-(280, 17, 38, 39, NULL),
-(281, 17, 39, NULL, 18),
-(282, 18, 8, 17, NULL),
-(283, 18, 17, 21, NULL),
-(284, 18, 21, 22, NULL),
-(285, 18, 22, 36, NULL),
-(286, 18, 36, 38, NULL),
-(287, 18, 38, 40, NULL),
-(288, 18, 40, NULL, 19),
-(289, 19, 2, 8, NULL),
-(290, 19, 8, 14, NULL),
-(291, 19, 14, 21, NULL),
-(292, 19, 21, 22, NULL),
-(293, 19, 22, 28, NULL),
-(294, 19, 28, 29, NULL),
-(295, 19, 29, 33, NULL),
-(296, 19, 33, 34, NULL),
-(297, 19, 34, 36, NULL),
-(298, 19, 36, 38, NULL),
-(299, 19, 38, 40, NULL),
-(300, 19, 40, NULL, 20),
-(301, 20, 10, 16, NULL),
-(302, 20, 16, 21, NULL),
-(303, 20, 21, 23, NULL),
-(304, 20, 23, 35, NULL),
-(305, 20, 35, 37, NULL),
-(306, 20, 37, 40, NULL),
-(307, 20, 40, NULL, 21),
-(308, 21, 10, 16, NULL),
-(309, 21, 16, 21, NULL),
-(310, 21, 21, 23, NULL),
-(311, 21, 23, 35, NULL),
-(312, 21, 35, 37, NULL),
-(313, 21, 37, 40, NULL),
-(314, 21, 40, NULL, 22);
-
--- --------------------------------------------------------
+LOCK TABLES `rule_breadth` WRITE;
+/*!40000 ALTER TABLE `rule_breadth` DISABLE KEYS */;
+INSERT INTO `rule_breadth` VALUES (318,23,1,2,NULL),(319,23,2,3,NULL),(320,23,3,5,NULL),(321,23,5,6,NULL),(322,23,6,7,NULL),(323,23,7,8,NULL),(324,23,8,9,NULL),(325,23,9,10,NULL),(326,23,10,12,NULL),(327,23,12,19,NULL),(328,23,19,20,NULL),(329,23,20,21,NULL),(330,23,21,22,NULL),(331,23,22,24,NULL),(332,23,24,25,NULL),(333,23,25,26,NULL),(334,23,26,27,NULL),(335,23,27,28,NULL),(336,23,28,32,NULL),(337,23,32,33,NULL),(338,23,33,34,NULL),(339,23,34,37,NULL),(340,23,37,39,NULL),(341,23,39,NULL,1),(342,24,1,2,NULL),(343,24,2,3,NULL),(344,24,3,5,NULL),(345,24,5,6,NULL),(346,24,6,7,NULL),(347,24,7,8,NULL),(348,24,8,9,NULL),(349,24,9,10,NULL),(350,24,10,12,NULL),(351,24,12,19,NULL),(352,24,19,20,NULL),(353,24,20,22,NULL),(354,24,22,24,NULL),(355,24,24,25,NULL),(356,24,25,27,NULL),(357,24,27,28,NULL),(358,24,28,33,NULL),(359,24,33,35,NULL),(360,24,35,37,NULL),(361,24,37,39,NULL),(362,24,39,NULL,2),(363,25,1,2,NULL),(364,25,2,3,NULL),(365,25,3,5,NULL),(366,25,5,6,NULL),(367,25,6,7,NULL),(368,25,7,8,NULL),(369,25,8,9,NULL),(370,25,9,10,NULL),(371,25,10,12,NULL),(372,25,12,19,NULL),(373,25,19,20,NULL),(374,25,20,22,NULL),(375,25,22,24,NULL),(376,25,24,25,NULL),(377,25,25,26,NULL),(378,25,26,27,NULL),(379,25,27,28,NULL),(380,25,28,32,NULL),(381,25,32,33,NULL),(382,25,33,35,NULL),(383,25,35,37,NULL),(384,25,37,38,NULL),(385,25,38,39,NULL),(386,25,39,NULL,3),(387,26,1,2,NULL),(388,26,2,3,NULL),(389,26,3,5,NULL),(390,26,5,6,NULL),(391,26,6,7,NULL),(392,26,7,8,NULL),(393,26,8,9,NULL),(394,26,9,10,NULL),(395,26,10,11,NULL),(396,26,11,12,NULL),(397,26,12,13,NULL),(398,26,13,14,NULL),(399,26,14,16,NULL),(400,26,16,20,NULL),(401,26,20,21,NULL),(402,26,21,22,NULL),(403,26,22,26,NULL),(404,26,26,27,NULL),(405,26,27,28,NULL),(406,26,28,29,NULL),(407,26,29,30,NULL),(408,26,30,32,NULL),(409,26,32,33,NULL),(410,26,33,35,NULL),(411,26,35,36,NULL),(412,26,36,39,NULL),(413,26,39,NULL,4),(414,27,1,2,NULL),(415,27,2,5,NULL),(416,27,5,16,NULL),(417,27,16,19,NULL),(418,27,19,20,NULL),(419,27,20,22,NULL),(420,27,22,34,NULL),(421,27,34,37,NULL),(422,27,37,38,NULL),(423,27,38,NULL,5),(424,28,1,2,NULL),(425,28,2,3,NULL),(426,28,3,5,NULL),(427,28,5,6,NULL),(428,28,6,7,NULL),(429,28,7,8,NULL),(430,28,8,9,NULL),(431,28,9,10,NULL),(432,28,10,11,NULL),(433,28,11,12,NULL),(434,28,12,19,NULL),(435,28,19,20,NULL),(436,28,20,22,NULL),(437,28,22,24,NULL),(438,28,24,31,NULL),(439,28,31,34,NULL),(440,28,34,37,NULL),(441,28,37,NULL,6),(442,29,1,2,NULL),(443,29,2,4,NULL),(444,29,4,11,NULL),(445,29,11,12,NULL),(446,29,12,13,NULL),(447,29,13,14,NULL),(448,29,14,18,NULL),(449,29,18,21,NULL),(450,29,21,22,NULL),(451,29,22,25,NULL),(452,29,25,27,NULL),(453,29,27,28,NULL),(454,29,28,33,NULL),(455,29,33,35,NULL),(456,29,35,39,NULL),(457,29,39,NULL,7),(458,30,1,2,NULL),(459,30,2,4,NULL),(460,30,4,11,NULL),(461,30,11,18,NULL),(462,30,18,21,NULL),(463,30,21,22,NULL),(464,30,22,25,NULL),(465,30,25,26,NULL),(466,30,26,27,NULL),(467,30,27,28,NULL),(468,30,28,33,NULL),(469,30,33,35,NULL),(470,30,35,36,NULL),(471,30,36,39,NULL),(472,30,39,NULL,8),(473,31,1,2,NULL),(474,31,2,3,NULL),(475,31,3,4,NULL),(476,31,4,12,NULL),(477,31,12,13,NULL),(478,31,13,18,NULL),(479,31,18,21,NULL),(480,31,21,22,NULL),(481,31,22,24,NULL),(482,31,24,25,NULL),(483,31,25,30,NULL),(484,31,30,34,NULL),(485,31,34,36,NULL),(486,31,36,39,NULL),(487,31,39,NULL,9),(488,32,5,14,NULL),(489,32,14,21,NULL),(490,32,21,23,NULL),(491,32,23,24,NULL),(492,32,24,NULL,10),(493,33,1,2,NULL),(494,33,2,10,NULL),(495,33,10,12,NULL),(496,33,12,13,NULL),(497,33,13,21,NULL),(498,33,21,NULL,11),(499,34,2,8,NULL),(500,34,8,13,NULL),(501,34,13,14,NULL),(502,34,14,20,NULL),(503,34,20,22,NULL),(504,34,22,26,NULL),(505,34,26,27,NULL),(506,34,27,28,NULL),(507,34,28,32,NULL),(508,34,32,33,NULL),(509,34,33,35,NULL),(510,34,35,37,NULL),(511,34,37,39,NULL),(512,34,39,NULL,12),(513,35,4,5,NULL),(514,35,5,6,NULL),(515,35,6,7,NULL),(516,35,7,14,NULL),(517,35,14,21,NULL),(518,35,21,23,NULL),(519,35,23,NULL,13),(520,36,1,2,NULL),(521,36,2,3,NULL),(522,36,3,4,NULL),(523,36,4,5,NULL),(524,36,5,6,NULL),(525,36,6,7,NULL),(526,36,7,8,NULL),(527,36,8,9,NULL),(528,36,9,10,NULL),(529,36,10,12,NULL),(530,36,12,13,NULL),(531,36,13,14,NULL),(532,36,14,16,NULL),(533,36,16,21,NULL),(534,36,21,22,NULL),(535,36,22,24,NULL),(536,36,24,28,NULL),(537,36,28,30,NULL),(538,36,30,34,NULL),(539,36,34,35,NULL),(540,36,35,36,NULL),(541,36,36,38,NULL),(542,36,38,39,NULL),(543,36,39,NULL,14),(544,37,2,8,NULL),(545,37,8,13,NULL),(546,37,13,21,NULL),(547,37,21,23,NULL),(548,37,23,27,NULL),(549,37,27,28,NULL),(550,37,28,33,NULL),(551,37,33,35,NULL),(552,37,35,37,NULL),(553,37,37,39,NULL),(554,37,39,NULL,15),(555,38,5,6,NULL),(556,38,6,15,NULL),(557,38,15,NULL,16),(558,39,1,2,NULL),(559,39,2,3,NULL),(560,39,3,4,NULL),(561,39,4,11,NULL),(562,39,11,12,NULL),(563,39,12,16,NULL),(564,39,16,20,NULL),(565,39,20,22,NULL),(566,39,22,35,NULL),(567,39,35,37,NULL),(568,39,37,39,NULL),(569,39,39,NULL,17),(570,40,2,8,NULL),(571,40,8,14,NULL),(572,40,14,21,NULL),(573,40,21,22,NULL),(574,40,22,27,NULL),(575,40,27,28,NULL),(576,40,28,32,NULL),(577,40,32,33,NULL),(578,40,33,35,NULL),(579,40,35,37,NULL),(580,40,37,39,NULL),(581,40,39,NULL,18),(582,41,8,17,NULL),(583,41,17,21,NULL),(584,41,21,22,NULL),(585,41,22,35,NULL),(586,41,35,37,NULL),(587,41,37,39,NULL),(588,41,39,NULL,19),(589,42,10,16,NULL),(590,42,16,21,NULL),(591,42,21,22,NULL),(592,42,22,34,NULL),(593,42,34,36,NULL),(594,42,36,39,NULL),(595,42,39,NULL,20),(596,43,10,16,NULL),(597,43,16,21,NULL),(598,43,21,22,NULL),(599,43,22,34,NULL),(600,43,34,36,NULL),(601,43,36,39,NULL),(602,43,39,NULL,21);
+/*!40000 ALTER TABLE `rule_breadth` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `tmp_konsultasi`
 --
 
+DROP TABLE IF EXISTS `tmp_konsultasi`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tmp_konsultasi` (
-  `id_tmp_konsultasi` int(11) NOT NULL,
+  `id_tmp_konsultasi` int(11) NOT NULL AUTO_INCREMENT,
   `id_ms_gejala` int(11) DEFAULT NULL,
   `id_prev_gejala` int(11) DEFAULT NULL,
   `id_user` int(11) DEFAULT NULL,
-  `answer` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `answer` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_tmp_konsultasi`),
+  KEY `tmp_konsultasi_ibfk_1` (`id_ms_gejala`),
+  KEY `tmp_konsultasi_ibfk_2` (`id_prev_gejala`),
+  KEY `tmp_konsultasi_ibfk_3` (`id_user`),
+  CONSTRAINT `tmp_konsultasi_ibfk_1` FOREIGN KEY (`id_ms_gejala`) REFERENCES `ms_gejala` (`id_ms_gejala`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tmp_konsultasi_ibfk_2` FOREIGN KEY (`id_prev_gejala`) REFERENCES `ms_gejala` (`id_ms_gejala`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `tmp_konsultasi_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- --------------------------------------------------------
+--
+-- Dumping data for table `tmp_konsultasi`
+--
+
+LOCK TABLES `tmp_konsultasi` WRITE;
+/*!40000 ALTER TABLE `tmp_konsultasi` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tmp_konsultasi` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_role` int(11) DEFAULT NULL,
   `nama_user` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `id_role` (`id_role`),
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_role`) REFERENCES `role` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `id_role`, `nama_user`, `username`, `password`, `created_at`) VALUES
-(1, 1, 'Aan Super Admin', 'aan_admin', 'e10adc3949ba59abbe56e057f20f883e', '2022-10-15 15:24:00'),
-(2, 2, 'Aan User', 'aan_user', 'e10adc3949ba59abbe56e057f20f883e', '2022-10-15 15:24:00'),
-(13, 2, 'Nugget', 'nu99etz', 'e10adc3949ba59abbe56e057f20f883e', '2022-12-25 03:50:46'),
-(14, 2, 'Yoga', 'yoga1234', 'e10adc3949ba59abbe56e057f20f883e', '2022-12-25 05:27:05'),
-(15, 2, 'Yahya', 'yahya123', 'e10adc3949ba59abbe56e057f20f883e', '2022-12-25 05:27:58');
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,1,'Aan Super Admin','aan_admin','e10adc3949ba59abbe56e057f20f883e','2022-10-15 15:24:00'),(2,2,'Aan User','aan_user','e10adc3949ba59abbe56e057f20f883e','2022-10-15 15:24:00'),(13,2,'Nugget','nu99etz','e10adc3949ba59abbe56e057f20f883e','2022-12-25 03:50:46'),(14,2,'Yoga','yoga1234','e10adc3949ba59abbe56e057f20f883e','2022-12-25 05:27:05'),(15,2,'Yahya','yahya123','e10adc3949ba59abbe56e057f20f883e','2022-12-25 05:27:58');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `certainly_factor`
---
-ALTER TABLE `certainly_factor`
-  ADD PRIMARY KEY (`id_certainly_factor`),
-  ADD KEY `id_gejala` (`id_gejala`),
-  ADD KEY `id_penyakit` (`id_penyakit`);
-
---
--- Indexes for table `detail_konsultasi_gejala`
---
-ALTER TABLE `detail_konsultasi_gejala`
-  ADD PRIMARY KEY (`id_detail_konsultasi_gejala`),
-  ADD KEY `id_konsultasi` (`id_konsultasi`),
-  ADD KEY `id_gejala` (`id_gejala`);
-
---
--- Indexes for table `detail_konsultasi_penyakit`
---
-ALTER TABLE `detail_konsultasi_penyakit`
-  ADD PRIMARY KEY (`id_detail_konsultasi_penyakit`),
-  ADD KEY `detail_konsultasi_penyakit_ibfk_1` (`id_konsultasi`),
-  ADD KEY `detail_konsultasi_penyakit_ibfk_2` (`id_penyakit`);
-
---
--- Indexes for table `konsultasi`
---
-ALTER TABLE `konsultasi`
-  ADD PRIMARY KEY (`id_konsultasi`),
-  ADD KEY `id_user` (`id_user`);
-
---
--- Indexes for table `kontak`
---
-ALTER TABLE `kontak`
-  ADD PRIMARY KEY (`id_kontak`);
-
---
--- Indexes for table `ms_gejala`
---
-ALTER TABLE `ms_gejala`
-  ADD PRIMARY KEY (`id_ms_gejala`),
-  ADD KEY `id_ms_kategori_gejala` (`id_ms_kategori_gejala`);
-
---
--- Indexes for table `ms_kategori_gejala`
---
-ALTER TABLE `ms_kategori_gejala`
-  ADD PRIMARY KEY (`id_ms_kategori_gejala`);
-
---
--- Indexes for table `ms_penyakit`
---
-ALTER TABLE `ms_penyakit`
-  ADD PRIMARY KEY (`id_ms_penyakit`);
-
---
--- Indexes for table `register`
---
-ALTER TABLE `register`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_user` (`id_user`);
-
---
--- Indexes for table `role`
---
-ALTER TABLE `role`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `rule`
---
-ALTER TABLE `rule`
-  ADD PRIMARY KEY (`id_rule`),
-  ADD KEY `id_ms_penyakit` (`id_ms_penyakit`);
-
---
--- Indexes for table `rule_breadth`
---
-ALTER TABLE `rule_breadth`
-  ADD PRIMARY KEY (`id_rule_breadth`),
-  ADD KEY `rule_breadth_ibfk_1` (`id_rule`),
-  ADD KEY `rule_breadth_ibfk_2` (`parent_ms_gejala`),
-  ADD KEY `rule_breadth_ibfk_3` (`child_ms_gejala`),
-  ADD KEY `rule_breadth_ibfk_4` (`id_ms_penyakit`);
-
---
--- Indexes for table `tmp_konsultasi`
---
-ALTER TABLE `tmp_konsultasi`
-  ADD PRIMARY KEY (`id_tmp_konsultasi`),
-  ADD KEY `tmp_konsultasi_ibfk_1` (`id_ms_gejala`),
-  ADD KEY `tmp_konsultasi_ibfk_2` (`id_prev_gejala`),
-  ADD KEY `tmp_konsultasi_ibfk_3` (`id_user`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_role` (`id_role`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `certainly_factor`
---
-ALTER TABLE `certainly_factor`
-  MODIFY `id_certainly_factor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=298;
-
---
--- AUTO_INCREMENT for table `detail_konsultasi_gejala`
---
-ALTER TABLE `detail_konsultasi_gejala`
-  MODIFY `id_detail_konsultasi_gejala` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
-
---
--- AUTO_INCREMENT for table `detail_konsultasi_penyakit`
---
-ALTER TABLE `detail_konsultasi_penyakit`
-  MODIFY `id_detail_konsultasi_penyakit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
-
---
--- AUTO_INCREMENT for table `konsultasi`
---
-ALTER TABLE `konsultasi`
-  MODIFY `id_konsultasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `kontak`
---
-ALTER TABLE `kontak`
-  MODIFY `id_kontak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `ms_gejala`
---
-ALTER TABLE `ms_gejala`
-  MODIFY `id_ms_gejala` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
-
---
--- AUTO_INCREMENT for table `ms_kategori_gejala`
---
-ALTER TABLE `ms_kategori_gejala`
-  MODIFY `id_ms_kategori_gejala` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT for table `ms_penyakit`
---
-ALTER TABLE `ms_penyakit`
-  MODIFY `id_ms_penyakit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
---
--- AUTO_INCREMENT for table `register`
---
-ALTER TABLE `register`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT for table `role`
---
-ALTER TABLE `role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `rule`
---
-ALTER TABLE `rule`
-  MODIFY `id_rule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
---
--- AUTO_INCREMENT for table `rule_breadth`
---
-ALTER TABLE `rule_breadth`
-  MODIFY `id_rule_breadth` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=318;
-
---
--- AUTO_INCREMENT for table `tmp_konsultasi`
---
-ALTER TABLE `tmp_konsultasi`
-  MODIFY `id_tmp_konsultasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `certainly_factor`
---
-ALTER TABLE `certainly_factor`
-  ADD CONSTRAINT `certainly_factor_ibfk_1` FOREIGN KEY (`id_gejala`) REFERENCES `ms_gejala` (`id_ms_gejala`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `certainly_factor_ibfk_2` FOREIGN KEY (`id_penyakit`) REFERENCES `ms_penyakit` (`id_ms_penyakit`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `detail_konsultasi_gejala`
---
-ALTER TABLE `detail_konsultasi_gejala`
-  ADD CONSTRAINT `detail_konsultasi_gejala_ibfk_1` FOREIGN KEY (`id_konsultasi`) REFERENCES `konsultasi` (`id_konsultasi`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `detail_konsultasi_gejala_ibfk_2` FOREIGN KEY (`id_gejala`) REFERENCES `ms_gejala` (`id_ms_gejala`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `detail_konsultasi_penyakit`
---
-ALTER TABLE `detail_konsultasi_penyakit`
-  ADD CONSTRAINT `detail_konsultasi_penyakit_ibfk_1` FOREIGN KEY (`id_konsultasi`) REFERENCES `konsultasi` (`id_konsultasi`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `detail_konsultasi_penyakit_ibfk_2` FOREIGN KEY (`id_penyakit`) REFERENCES `ms_penyakit` (`id_ms_penyakit`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `konsultasi`
---
-ALTER TABLE `konsultasi`
-  ADD CONSTRAINT `konsultasi_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `ms_gejala`
---
-ALTER TABLE `ms_gejala`
-  ADD CONSTRAINT `ms_gejala_ibfk_1` FOREIGN KEY (`id_ms_kategori_gejala`) REFERENCES `ms_kategori_gejala` (`id_ms_kategori_gejala`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `register`
---
-ALTER TABLE `register`
-  ADD CONSTRAINT `register_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `rule`
---
-ALTER TABLE `rule`
-  ADD CONSTRAINT `rule_ibfk_1` FOREIGN KEY (`id_ms_penyakit`) REFERENCES `ms_penyakit` (`id_ms_penyakit`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `rule_breadth`
---
-ALTER TABLE `rule_breadth`
-  ADD CONSTRAINT `rule_breadth_ibfk_1` FOREIGN KEY (`id_rule`) REFERENCES `rule` (`id_rule`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `rule_breadth_ibfk_2` FOREIGN KEY (`parent_ms_gejala`) REFERENCES `ms_gejala` (`id_ms_gejala`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `rule_breadth_ibfk_3` FOREIGN KEY (`child_ms_gejala`) REFERENCES `ms_gejala` (`id_ms_gejala`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `rule_breadth_ibfk_4` FOREIGN KEY (`id_ms_penyakit`) REFERENCES `ms_penyakit` (`id_ms_penyakit`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `tmp_konsultasi`
---
-ALTER TABLE `tmp_konsultasi`
-  ADD CONSTRAINT `tmp_konsultasi_ibfk_1` FOREIGN KEY (`id_ms_gejala`) REFERENCES `ms_gejala` (`id_ms_gejala`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tmp_konsultasi_ibfk_2` FOREIGN KEY (`id_prev_gejala`) REFERENCES `ms_gejala` (`id_ms_gejala`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tmp_konsultasi_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_role`) REFERENCES `role` (`id`);
-COMMIT;
-
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-02-23  8:08:52

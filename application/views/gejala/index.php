@@ -30,7 +30,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <div class="box-body">
                         <div style="float: right;">
                             <button action="<?php echo base_url(); ?>gejala/create" type="button" class="btn-add btn btn-flat btn-sm btn-success"><i class="fa fa-plus"></i> Tambah</button>
-                            <button action="<?php echo base_url(); ?>gejala/createImport" type="button" class="btn-import btn btn-flat btn-sm btn-primary"><i class="fa fa-upload"></i> Import</button>
+                            <!-- <button action="<?php echo base_url(); ?>gejala/createImport" type="button" class="btn-import btn btn-flat btn-sm btn-primary"><i class="fa fa-upload"></i> Import</button> -->
                         </div>
                         <br />
                         <br />
