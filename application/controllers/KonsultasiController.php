@@ -11,6 +11,9 @@ class KonsultasiController extends MainController
     protected $gejalaSekarang;
     protected $gejalaSebelum;
 
+    protected $tempPenyakit = [];
+    protected $groupByPenyakit = [];
+
     public function __construct()
     {
         parent::__construct();
@@ -23,6 +26,19 @@ class KonsultasiController extends MainController
     private function setGejalaSebelum($gejala)
     {
         $this->gejalaSebelum[] = $gejala;
+    }
+
+    private function setTempPenyakit($penyakit)
+    {
+        array_push($this->tempPenyakit, $penyakit);
+        // set group by penyakit
+        foreach($this->tempPenyakit as $valuePenyakit) {
+            foreach($valuePenyakit as $valuePenyakit2) {
+                if(!in_array($valuePenyakit2, $this->groupByPenyakit)) {
+                    array_push($this->groupByPenyakit, $valuePenyakit2);
+                }
+            }
+        }
     }
 
     private function setGejalaSekarang($gejala)
@@ -60,29 +76,127 @@ class KonsultasiController extends MainController
         return $penyakit;
     }
 
+    // private function forwardChainning($gejala)
+    // {
+    //     $this->setGejalaSebelum($gejala);
+
+    //     // gabungkan semua gejala jawaban ya mulai dari gejala sebelumnya
+    //     // G1->G2 dst sampai gejala yang dipilih habis
+    //     $this->setGejalaSekarang($this->gejalaSebelum);
+
+    //     // node gabungan gejala sekarang
+    //     $whereLike = $this->getGejalaSekarang() . '%';
+
+    //     // query ke tabel aturan sesuai node yang sudah digabung menjadi satu
+    //     $sqlAturan = "select*from rule where gejala like '$whereLike'";
+    //     $queryAturan = $this->db->query($sqlAturan)->result_array();
+    //     $data = [];
+    //     foreach ($queryAturan as $key => $value) {
+    //         $exp = explode(",", $value['gejala']);
+    //         if (in_array($gejala, $exp)) {
+    //             $data[] = $queryAturan[$key];
+    //         }
+    //     }
+    //     return $data;
+    // }
+
     private function forwardChainning($gejala)
     {
         $this->setGejalaSebelum($gejala);
 
-        // gabungkan semua gejala jawaban ya mulai dari gejala sebelumnya
-        // G1->G2 dst sampai gejala yang dipilih habis
-        $this->setGejalaSekarang($this->gejalaSebelum);
-
-        // node gabungan gejala sekarang
-        $whereLike = $this->getGejalaSekarang() . '%';
-
         // query ke tabel aturan sesuai node yang sudah digabung menjadi satu
-        $sqlAturan = "select*from rule where gejala like '$whereLike'";
+        $sqlAturan = "select*from certainly_factor where id_gejala = $gejala";
         $queryAturan = $this->db->query($sqlAturan)->result_array();
         $data = [];
-        foreach ($queryAturan as $key => $value) {
-            $exp = explode(",", $value['gejala']);
-            if (in_array($gejala, $exp)) {
-                $data[] = $queryAturan[$key];
-            }
+        foreach($queryAturan as $key => $value) {
+            $data[] = $value['id_penyakit'];
         }
         return $data;
     }
+
+    private function calculateForwardChaining()
+    {
+        foreach($this->tempPenyakit as $valuePenyakit) {
+            $
+            foreach
+        }
+    }
+
+    // private function getForwardChainning($answer)
+    // {
+    //     $nodeJawabanYa = [];
+    //     $penyakitNode = [];
+    //     $nilaiKepercayaan = [];
+
+    //     foreach ($answer as $key => $value) {
+    //         // cek semua jawaban node jika jawaban ya maka gabung node menjadi satu
+    //         if (isset($value)) {
+    //             $nodeJawabanYa[] = $key;
+    //             $nilaiKepercayaan[] = $value;
+    //             $penyakit = $this->forwardChainning($key);
+    //             if (!empty($penyakit)) {
+    //                 $penyakitNode[] = $penyakit;
+    //             }
+    //         }
+    //     }
+
+    //     if (!empty($nodeJawabanYa)) {
+    //         $implodeJawabanYa = implode(',', $nodeJawabanYa);
+    //         if (!empty($penyakitNode)) {
+    //             // cocokan node dan hasil query dari aturan
+    //             $match = [];
+    //             for ($i = 0; $i < count($penyakitNode); $i++) {
+    //                 for ($j = 0; $j < count($penyakitNode[$i]); $j++) {
+    //                     if ($implodeJawabanYa == $penyakitNode[$i][$j]['gejala']) {
+    //                         $match[$penyakitNode[$i][$j]['id_ms_penyakit']] = 0;
+    //                     } else {
+    //                         $match[$penyakitNode[$i][$j]['id_ms_penyakit']] = 1;
+    //                     }
+    //                 }
+    //             }
+
+    //             // cek apakah ada nilai 0 dalam setiap kecocokan node
+    //             foreach ($match as $key => $value) {
+    //                 if ($value == 0) {
+    //                     $cekPenyakit = $key;
+    //                 }
+    //             }
+
+    //             if (empty($cekPenyakit)) {
+    //                 $penyakit = [];
+    //                 foreach ($match as $key => $value) {
+    //                     $penyakit[] = $this->getPenyakit($key);
+    //                 }
+    //                 $kemungkinan = 0;
+    //             } else {
+    //                 $penyakit = [];
+    //                 $penyakit[] = $this->getPenyakit($cekPenyakit);
+    //                 $kemungkinan = 1;
+    //             }
+    //         } else {
+    //             $penyakit = [];
+    //             $kemungkinan = 1;
+    //         }
+
+    //         // mapping jawaban iya
+    //         $jawabanYa = [];
+    //         foreach ($nodeJawabanYa as $value) {
+    //             $jawabanYa[] = $this->getGejala($value);
+    //         }
+    //     } else {
+    //         $penyakit = [];
+    //         $jawabanYa = [];
+    //     }
+
+    //     $data = [
+    //         'jawabanYa' => $jawabanYa,
+    //         'nilaiKepercayaan' => $nilaiKepercayaan,
+    //         'penyakit' => $penyakit,
+    //         'kemungkinan' => $kemungkinan
+    //     ];
+
+    //     return $data;
+    // }
 
     private function getForwardChainning($answer)
     {
@@ -97,10 +211,16 @@ class KonsultasiController extends MainController
                 $nilaiKepercayaan[] = $value;
                 $penyakit = $this->forwardChainning($key);
                 if (!empty($penyakit)) {
-                    $penyakitNode[] = $penyakit;
+                    $penyakitNode = $penyakit;
                 }
+                $this->setTempPenyakit($penyakitNode);
             }
         }
+
+        // eliminate and calculate penyakit more than 3
+        $this->maintence->Debug($this->groupByPenyakit);
+
+
 
         if (!empty($nodeJawabanYa)) {
             $implodeJawabanYa = implode(',', $nodeJawabanYa);

@@ -16,7 +16,7 @@ class AturanController extends MainController
         $this->load->model('GejalaModel', 'gejala');
         $this->load->model('AturanModel', 'aturan');
     }
-    
+
     public function ajax()
     {
         $data = $this->aturan->getAllAturan();
