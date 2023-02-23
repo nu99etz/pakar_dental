@@ -76,7 +76,7 @@
                             <tr>
                                 <th>Kode Penyakit</th>
                                 <th>Nama Penyakit</th>
-                                <th>Pengobatan Penyakit</th>
+                                <th>KIE</th>
                             </tr>
                             <?php foreach ($penyakit_fc['penyakit_fc'] as $key => $value) {
                             ?>
@@ -102,7 +102,7 @@
                             <tr>
                                 <th>Kode Penyakit</th>
                                 <th>Nama Penyakit</th>
-                                <th>Pengobatan Penyakit</th>
+                                <th>KIE</th>
                                 <th>Presentase</th>
                             </tr>
                             <?php $i = 0;
