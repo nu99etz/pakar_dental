@@ -75,7 +75,7 @@
                             <tr>
                                 <th>Kode Penyakit</th>
                                 <th>Nama Penyakit</th>
-                                <th>KIE</th>
+                                <th>Komunikasi Informasi dan Edukasi</th>
                             </tr>
                             <?php foreach ($konsultasi['penyakit'] as $key => $value) {
                             ?>
@@ -101,7 +101,7 @@
                             <tr>
                                 <th>Kode Penyakit</th>
                                 <th>Nama Penyakit</th>
-                                <th>KIE</th>
+                                <th>Komunikasi Informasi dan Edukasi</th>
                                 <th>Presentase</th>
                             </tr>
                             <?php $i = 0;

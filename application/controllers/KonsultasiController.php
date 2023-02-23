@@ -284,6 +284,9 @@ class KonsultasiController extends MainController
                     }
                 } else {
                     $penyakit = [];
+                    foreach ($penyakitNode as $valuePenyakitNode) {
+                        $penyakit[] = $this->getPenyakit($valuePenyakitNode);
+                    }
                     $kemungkinan = 0;
                 }
 
