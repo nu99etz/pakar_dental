@@ -431,7 +431,7 @@ class KonsultasiController extends MainController
             }
         }
 
-        if (count($answer) > 3) {
+        if (count($answer) >= 3) {
             $forward_chainning = $this->getForwardChainning($answer);
             $cf = $this->certainlyFactor($answer);
 
