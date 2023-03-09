@@ -61,7 +61,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                 <td>No.</td>
                                                 <td>Kode Penyakit</td>
                                                 <td>Nama Penyakit</td>
-                                                <td>Solusi Penyakit</td>
+                                                <td>Komunikasi Informasi dan Edukasi</td>
                                             </tr>
                                         </thead>
                                         <tbody>

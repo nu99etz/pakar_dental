@@ -20,7 +20,7 @@ if (empty($penyakit)) {
     </div>
 
     <div class="form-group">
-        <label for="solusi_penyakit">Solusi Penyakit</label>
+        <label for="solusi_penyakit">Komunikasi Informasi dan Edukasi</label>
         <textarea class="form-control" name="solusi_penyakit" id="solusi_penyakit" placeholder="Solusi Penyakit"><?php echo $solusi_penyakit; ?></textarea>
     </div>
 

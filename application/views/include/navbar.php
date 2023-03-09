@@ -14,7 +14,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>F</b>C</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Forward Chainning</b></span>
+                <span class="logo-lg"><b>FC & CF</b></span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
