@@ -412,7 +412,16 @@ class KonsultasiController extends MainController
 
         $gejala = $this->konsultasi->getAllGejalaGrouping();
         $layout = 'konsultasi/index';
+        $nilai_kepercayaan = [
+            "1" => "Sangat Percaya",
+            "0.8" => "Yakin",
+            "0.6" => "Cukup Yakin",
+            "0.4" => "Sedikit Yakin",
+            "0.2" => "Tidak Tahu",
+            "0" => "Tidak"
+        ];
         $data = [
+            'nilai_kepercayaan' => $nilai_kepercayaan,
             // 'parent_gejala' => 0,
             'gejala' => $gejala,
             'action' => base_url() . 'konsultasi/result'

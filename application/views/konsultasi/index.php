@@ -69,7 +69,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             </div>
                                         </td> -->
                                         <td>
-                                            <input type='text' class='form-control rounded-0' name='nilai_cf[<?php echo $value_gejala['id_ms_gejala']; ?>]' id='nilai_cf' placeholder=''>
+                                            <!-- <input type='text' class='form-control rounded-0' name='nilai_cf[<?php echo $value_gejala['id_ms_gejala']; ?>]' id='nilai_cf' placeholder=''> -->
+                                            <select class="form-control rounded-0 select2" name='nilai_cf[<?php echo $value_gejala['id_ms_gejala']; ?>]' id='nilai_cf' style="width: 100%;">
+                                            <option></option>
+                                            <?php foreach($nilai_kepercayaan as $key => $value) {
+                                                ?>
+                                                <option value = "<?php echo $key;?>"><?php echo $value;?></option>
+                                        <?php   } ?>
                                         </td>
                                     </tr>
                             <?php $no++;
