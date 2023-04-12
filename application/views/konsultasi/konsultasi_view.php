@@ -94,7 +94,7 @@
                 <!-- Default box -->
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Menggunakan Certainly Factor</h3>
+                        <h3 class="box-title">Menggunakan Certainty Factor</h3>
                     </div>
                     <div class="box-body">
                         <table id="penyakit" class="table table-bordered table-hover">
