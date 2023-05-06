@@ -440,7 +440,7 @@ class KonsultasiController extends MainController
             }
         }
 
-        if (count($answer) >= 3) {
+        if (count($answer) >= 5) {
             $forward_chainning = $this->getForwardChainning($answer);
             $cf = $this->certainlyFactor($answer);
 
@@ -465,7 +465,7 @@ class KonsultasiController extends MainController
             $this->getLayout($layout, $data);
         } else {
             $validation = [
-                'validation' => "Silahkan memilih minimal 3 gejala"
+                'validation' => "Silahkan memilih minimal 5 gejala"
             ];
             $this->session->set_userdata($validation);
             redirect('konsultasi/');
